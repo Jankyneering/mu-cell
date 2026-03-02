@@ -1,0 +1,3 @@
+[submodule "sxxcvr"]
+	path = sxxcvr
+	url = https://github.com/Jankyneering/sxxcvr.git
