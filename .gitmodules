@@ -1,3 +1,6 @@
 [submodule "software/submodules/sxxcvr"]
 	path = software/submodules/sxxcvr
 	url = https://github.com/Jankyneering/sxxcvr.git
+[submodule "hardware/development/SX1255_dev_hat"]
+	path = hardware/development/SX1255_dev_hat
+	url = https://github.com/Jankyneering/SX1255_dev_hat
