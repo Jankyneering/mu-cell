@@ -247,7 +247,7 @@
 		(uuid "1808ea7d-b242-48d6-bffa-d8abd2fba6e8")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/parts/2118707-4-CAN.STEP"
+	(model "${KIPRJMOD}/parts/3D/2118707-4-CAN.STEP"
 		(offset
 			(xyz 8.65 8.65 0)
 		)

@@ -1,4 +1,4 @@
-(footprint "U.FL_Vertical_GND"
+(footprint "U.FL_Vertical_Passthrough"
 	(version 20241229)
 	(generator "pcbnew")
 	(generator_version "9.0")
@@ -16,7 +16,7 @@
 			)
 		)
 	)
-	(property "Value" "U.FL_Vertical_GND"
+	(property "Value" "U.FL_Vertical_Passthrough"
 		(at 0 -3.302 0)
 		(layer "F.Fab")
 		(uuid "70ff6440-d334-48f5-b45d-47ec9d0b7357")
@@ -85,16 +85,6 @@
 		(uuid "377ba1e7-8bcf-482f-a7b3-eabc0a2b4cc2")
 	)
 	(fp_line
-		(start -0.7 -1.5)
-		(end -0.7 -2)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "F.SilkS")
-		(uuid "fd6afcd5-cf97-48f7-b984-881c9342f84b")
-	)
-	(fp_line
 		(start -0.7 1.5)
 		(end -1.5 1.5)
 		(stroke
@@ -103,16 +93,6 @@
 		)
 		(layer "F.SilkS")
 		(uuid "85983a8f-a990-40d9-9912-d1a6c652f022")
-	)
-	(fp_line
-		(start 0.7 -1.5)
-		(end 0.7 -2)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "F.SilkS")
-		(uuid "c9f1eba3-2b8c-4344-bfb5-ef5671b44acf")
 	)
 	(fp_line
 		(start 0.7 -1.5)
@@ -334,13 +314,6 @@
 		(uuid "12d1c2ba-46e7-449c-8bb9-bb9e432c4590")
 	)
 	(pad "2" smd roundrect
-		(at 0 -1.5 180)
-		(size 1 1)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.1)
-		(uuid "19bd4cdd-4ce8-4c7b-94d8-158d66c18582")
-	)
-	(pad "2" smd roundrect
 		(at 1.475 0 180)
 		(size 1.05 2.2)
 		(layers "F.Cu" "F.Mask" "F.Paste")
@@ -348,7 +321,7 @@
 		(uuid "bab1bb21-3ba3-401f-890d-647ea4caccc8")
 	)
 	(embedded_fonts no)
-	(model "${KICAD9_3DMODEL_DIR}/Connector_Coaxial.3dshapes/U.FL_Hirose_U.FL-R-SMT-1_Vertical.step"
+	(model "${KIPRJMOD}/parts/3D/U.FL_Vertical.step"
 		(offset
 			(xyz 0 0 0)
 		)

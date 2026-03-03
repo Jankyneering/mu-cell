@@ -9,3 +9,4 @@ private
 *.tmp
 *.log
 *cache*
+*.bak

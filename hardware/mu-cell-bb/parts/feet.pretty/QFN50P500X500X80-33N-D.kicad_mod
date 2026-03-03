@@ -364,7 +364,7 @@
 		(uuid "49bbca7e-0532-4247-9d1a-20e85998dd81")
 	)
 	(embedded_fonts no)
-	(model "SX1255IWLTRT.stp"
+	(model "${KIPRJMOD}/parts/3D/SX1255IWLTRT.stp"
 		(offset
 			(xyz 0 0 0)
 		)

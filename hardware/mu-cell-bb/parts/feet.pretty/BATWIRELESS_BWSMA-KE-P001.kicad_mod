@@ -187,7 +187,7 @@
 		(uuid "59ad5bf9-b1a9-4257-9d13-e41755fd53e1")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/parts/SMA_Side.step"
+	(model "${KIPRJMOD}/parts/3D/SMA_Side.step"
 		(offset
 			(xyz 0 0 0.4)
 		)

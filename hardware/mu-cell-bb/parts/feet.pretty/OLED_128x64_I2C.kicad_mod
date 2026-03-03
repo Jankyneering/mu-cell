@@ -250,7 +250,7 @@
 		(uuid "9fd09f01-b3a4-4c53-a5fc-8af2d4250db9")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/parts/OLED_128x64_I2C.step"
+	(model "${KIPRJMOD}/parts/3D/OLED_128x64_I2C.step"
 		(offset
 			(xyz 13.59 -13.53 2.5)
 		)
