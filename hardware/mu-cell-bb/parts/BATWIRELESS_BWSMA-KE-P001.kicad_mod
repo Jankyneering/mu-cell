@@ -158,33 +158,33 @@
 		(solder_mask_margin 0.102)
 		(uuid "dfef95a1-2c00-4267-8430-92d24e4b1463")
 	)
-	(pad "G1" smd rect
+	(pad "2" smd rect
 		(at -2.55 -2.1)
 		(size 1.3 4.2)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "67bc41b7-b1e3-4a43-bde1-2bb3f9ac01e9")
 	)
-	(pad "G2" smd rect
+	(pad "2" smd rect
+		(at -2.55 -2.1)
+		(size 1.3 4.2)
+		(layers "B.Cu" "B.Mask" "B.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "6f895f4a-3ad6-43e5-bc1e-6c0f13d58f1c")
+	)
+	(pad "2" smd rect
 		(at 2.55 -2.1)
 		(size 1.3 4.2)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "759ac2eb-5aa3-48b2-a551-34a741718bb5")
 	)
-	(pad "G3" smd rect
+	(pad "2" smd rect
 		(at 2.55 -2.1)
 		(size 1.3 4.2)
 		(layers "B.Cu" "B.Mask" "B.Paste")
 		(solder_mask_margin 0.102)
 		(uuid "59ad5bf9-b1a9-4257-9d13-e41755fd53e1")
-	)
-	(pad "G4" smd rect
-		(at -2.55 -2.1)
-		(size 1.3 4.2)
-		(layers "B.Cu" "B.Mask" "B.Paste")
-		(solder_mask_margin 0.102)
-		(uuid "6f895f4a-3ad6-43e5-bc1e-6c0f13d58f1c")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/parts/SMA_Side.step"

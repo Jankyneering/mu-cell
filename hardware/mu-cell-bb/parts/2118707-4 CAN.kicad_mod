@@ -1,0 +1,261 @@
+(footprint "2118707-4 CAN"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 2.05 -17.95 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "09283bc2-2941-4fd2-aaf9-fccb0931aea3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "2118707-4 CAN"
+		(at 8.65 0.7 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "93669392-55b9-406b-88fa-39c2b9e74fe9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "65caa02b-8ee0-4cc7-8f27-1b2271883c15")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "abb0eacb-606d-447c-a12a-895728a52aea")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_text user "${REFERENCE}"
+		(at 8.65 2.2 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "6095232f-4718-43ff-b431-44f8903091eb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd custom
+		(at 0 -17.3 180)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "113e8e69-3ee8-4445-9de9-cc8ecaa8ff8c")
+	)
+	(pad "1" smd custom
+		(at 0 -6.75 270)
+		(size 3.8 1)
+		(drill
+			(offset -1.9 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "c7b47c8d-b30d-43a5-b489-758a1245c566")
+	)
+	(pad "1" smd custom
+		(at 0 -1 180)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "d278bf60-5e7f-474f-bf4b-723060b7b885")
+	)
+	(pad "1" smd custom
+		(at 0 0 270)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "6a690e5c-9c17-45aa-849f-60917c49a5a5")
+	)
+	(pad "1" smd custom
+		(at 1 -17.3 90)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "dd058dd3-fb53-488a-b394-4e519fdc1efd")
+	)
+	(pad "1" smd custom
+		(at 6.75 -17.3 180)
+		(size 3.8 1)
+		(drill
+			(offset -1.9 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "363e3270-b5e1-4edb-b105-4e9f8c43a70e")
+	)
+	(pad "1" smd custom
+		(at 6.75 -1 180)
+		(size 3.8 1)
+		(drill
+			(offset -1.9 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "a532ce90-d1ac-40ff-85f7-0f3bb2c04637")
+	)
+	(pad "1" smd custom
+		(at 12.75 -17.3 180)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "356ce82d-9b99-424f-8789-44f842d10f4b")
+	)
+	(pad "1" smd custom
+		(at 12.75 -1 180)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "3fb49cdf-1f79-4c2b-92b4-129b95884c42")
+	)
+	(pad "1" smd custom
+		(at 16.3 -6.75 270)
+		(size 3.8 1)
+		(drill
+			(offset -1.9 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "05e3acb3-e5da-4a77-9ec4-27decdb8fed4")
+	)
+	(pad "1" smd custom
+		(at 16.3 0 270)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "64d8b757-5fc5-4953-89ae-0c64ab4520b8")
+	)
+	(pad "1" smd custom
+		(at 17.3 -17.3 90)
+		(size 4.55 1)
+		(drill
+			(offset -2.275 -0.5)
+		)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(zone_connect 2)
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives)
+		(uuid "1808ea7d-b242-48d6-bffa-d8abd2fba6e8")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/parts/2118707-4-CAN.STEP"
+		(offset
+			(xyz 8.65 8.65 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -180 -0 -0)
+		)
+	)
+)

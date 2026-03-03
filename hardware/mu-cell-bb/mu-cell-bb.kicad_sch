@@ -4560,6 +4560,110 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "parts:RFCAN"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "RFCAN"
+				(at 0 -2.286 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "parts:2118707-4 CAN"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "RFCAN_1_1"
+				(rectangle
+					(start -3.81 1.27)
+					(end 3.81 -1.27)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.81 1.27) (xy -2.54 2.54) (xy 5.08 2.54) (xy 3.81 1.27) (xy -3.81 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.81 1.27) (xy 5.08 2.54) (xy 5.08 0) (xy 3.81 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at -6.35 0 0)
+					(length 2.54)
+					(name "RFCAN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "parts:SSD1306"
 			(pin_names
 				(offset 1.016)
@@ -5082,13 +5186,13 @@
 		(uuid "1db0e43c-22b2-496d-ae39-63fa6c832108")
 	)
 	(junction
-		(at 148.59 186.69)
+		(at 123.19 186.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2002aca6-19e0-4f2e-b4c9-946aaa786de6")
 	)
 	(junction
-		(at 138.43 186.69)
+		(at 113.03 186.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "28f5654e-9b8c-4db4-a8c5-3b1927f69889")
@@ -5166,7 +5270,7 @@
 		(uuid "6f7e569c-8aa7-4461-beff-173f2a339dc8")
 	)
 	(junction
-		(at 143.51 186.69)
+		(at 118.11 186.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6f94c722-034c-401e-8f7a-7f49f5f6dd8d")
@@ -5707,6 +5811,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 184.15) (xy 144.78 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31cedd7a-a145-4dd3-add9-888e0df6cbc3")
+	)
+	(wire
+		(pts
 			(xy 40.64 60.96) (xy 40.64 64.77)
 		)
 		(stroke
@@ -5797,7 +5911,7 @@
 	)
 	(wire
 		(pts
-			(xy 148.59 186.69) (xy 158.75 186.69)
+			(xy 123.19 186.69) (xy 133.35 186.69)
 		)
 		(stroke
 			(width 0)
@@ -6367,6 +6481,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 186.69) (xy 142.24 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7854c137-85ee-4350-bc40-831f760b2378")
+	)
+	(wire
+		(pts
 			(xy 163.83 76.2) (xy 179.07 76.2)
 		)
 		(stroke
@@ -6457,7 +6581,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 186.69) (xy 143.51 186.69)
+			(xy 113.03 186.69) (xy 118.11 186.69)
 		)
 		(stroke
 			(width 0)
@@ -6497,7 +6621,7 @@
 	)
 	(wire
 		(pts
-			(xy 128.27 186.69) (xy 138.43 186.69)
+			(xy 102.87 186.69) (xy 113.03 186.69)
 		)
 		(stroke
 			(width 0)
@@ -7617,7 +7741,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.51 186.69) (xy 148.59 186.69)
+			(xy 118.11 186.69) (xy 123.19 186.69)
 		)
 		(stroke
 			(width 0)
@@ -8371,7 +8495,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SL_Mechanical:MountingHole_M3_3.2mm_Pad")
-		(at 148.59 181.61 0)
+		(at 123.19 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8380,7 +8504,7 @@
 		(fields_autoplaced yes)
 		(uuid "092e8bdb-4a6f-4913-b068-fec44ab11db2")
 		(property "Reference" "H3"
-			(at 152.4 180.3399 0)
+			(at 127 180.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8389,7 +8513,7 @@
 			)
 		)
 		(property "Value" "MountingHole_M3_3.2mm_Pad"
-			(at 152.4 182.8799 0)
+			(at 127 182.8799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8399,7 +8523,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
-			(at 148.59 185.42 0)
+			(at 123.19 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8408,7 +8532,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 148.59 181.61 0)
+			(at 123.19 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8417,7 +8541,7 @@
 			)
 		)
 		(property "Description" "3.2mm Diameter Mounting Hole Pad (M3)"
-			(at 148.59 181.61 0)
+			(at 123.19 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8611,7 +8735,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SL_Mechanical:MountingHole_M3_3.2mm_Pad")
-		(at 128.27 181.61 0)
+		(at 102.87 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8620,7 +8744,7 @@
 		(fields_autoplaced yes)
 		(uuid "16d3136f-d33f-4b6f-8268-a2e51f4dcf50")
 		(property "Reference" "H1"
-			(at 132.08 180.3399 0)
+			(at 106.68 180.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8629,7 +8753,7 @@
 			)
 		)
 		(property "Value" "MountingHole_M3_3.2mm_Pad"
-			(at 132.08 182.8799 0)
+			(at 106.68 182.8799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8639,7 +8763,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
-			(at 128.27 185.42 0)
+			(at 102.87 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8648,7 +8772,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 128.27 181.61 0)
+			(at 102.87 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8657,7 +8781,7 @@
 			)
 		)
 		(property "Description" "3.2mm Diameter Mounting Hole Pad (M3)"
-			(at 128.27 181.61 0)
+			(at 102.87 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12961,7 +13085,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 143.51 186.69 0)
+		(at 118.11 186.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12970,7 +13094,7 @@
 		(fields_autoplaced yes)
 		(uuid "778a2b21-c6ed-4634-87ff-a0d6fdae337f")
 		(property "Reference" "#PWR044"
-			(at 143.51 193.04 0)
+			(at 118.11 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12979,7 +13103,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 143.51 190.8231 0)
+			(at 118.11 190.8231 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12987,7 +13111,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 143.51 186.69 0)
+			(at 118.11 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12996,7 +13120,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 143.51 186.69 0)
+			(at 118.11 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13005,7 +13129,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 143.51 186.69 0)
+			(at 118.11 186.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13723,6 +13847,72 @@
 			(project "mu-cell-bb"
 				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
 					(reference "R24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 142.24 186.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8567874d-53d8-4d4f-9b3e-c61c508cc933")
+		(property "Reference" "#PWR061"
+			(at 142.24 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 142.24 190.8231 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 142.24 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.24 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 142.24 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e98a79e3-f211-4977-b8d9-e67db692ef62")
+		)
+		(instances
+			(project "mu-cell-bb"
+				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
+					(reference "#PWR061")
 					(unit 1)
 				)
 			)
@@ -14806,7 +14996,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SL_Mechanical:MountingHole_M3_3.2mm_Pad")
-		(at 138.43 181.61 0)
+		(at 113.03 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14815,7 +15005,7 @@
 		(fields_autoplaced yes)
 		(uuid "ad8f504b-25bd-4ac4-97db-8b103e54695b")
 		(property "Reference" "H2"
-			(at 142.24 180.3399 0)
+			(at 116.84 180.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14824,7 +15014,7 @@
 			)
 		)
 		(property "Value" "MountingHole_M3_3.2mm_Pad"
-			(at 142.24 182.8799 0)
+			(at 116.84 182.8799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14834,7 +15024,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
-			(at 138.43 185.42 0)
+			(at 113.03 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14843,7 +15033,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 138.43 181.61 0)
+			(at 113.03 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14852,7 +15042,7 @@
 			)
 		)
 		(property "Description" "3.2mm Diameter Mounting Hole Pad (M3)"
-			(at 138.43 181.61 0)
+			(at 113.03 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16235,6 +16425,73 @@
 			(project "mu-cell-bb"
 				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
 					(reference "R13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "parts:RFCAN")
+		(at 151.13 184.15 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c32baac0-5218-4e84-bad6-9f210dd5c5c3")
+		(property "Reference" "RFCAN1"
+			(at 157.48 182.2449 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND"
+			(at 157.48 184.7849 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "parts:2118707-4 CAN"
+			(at 151.13 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.13 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "02fa87b9-c2d4-44b4-a15e-b1cc47a8ffc3")
+		)
+		(instances
+			(project ""
+				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
+					(reference "RFCAN1")
 					(unit 1)
 				)
 			)
@@ -18066,7 +18323,7 @@
 	)
 	(symbol
 		(lib_id "PCM_SL_Mechanical:MountingHole_M3_3.2mm_Pad")
-		(at 158.75 181.61 0)
+		(at 133.35 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18075,7 +18332,7 @@
 		(fields_autoplaced yes)
 		(uuid "fd0cf44b-cc6b-4eea-bca1-491400dc419b")
 		(property "Reference" "H4"
-			(at 162.56 180.3399 0)
+			(at 137.16 180.3399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18084,7 +18341,7 @@
 			)
 		)
 		(property "Value" "MountingHole_M3_3.2mm_Pad"
-			(at 162.56 182.8799 0)
+			(at 137.16 182.8799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18094,7 +18351,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_DIN965_Pad"
-			(at 158.75 185.42 0)
+			(at 133.35 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18103,7 +18360,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 158.75 181.61 0)
+			(at 133.35 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18112,7 +18369,7 @@
 			)
 		)
 		(property "Description" "3.2mm Diameter Mounting Hole Pad (M3)"
-			(at 158.75 181.61 0)
+			(at 133.35 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18158,7 +18415,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_IDC:IDC-Header_2x06_P2.54mm_Vertical"
+		(property "Footprint" "Connector_IDC:IDC-Header_2x06_P2.54mm_Horizontal"
 			(at 247.65 69.85 0)
 			(effects
 				(font
