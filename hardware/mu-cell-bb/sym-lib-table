@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "parts")(type "KiCad")(uri "${KIPRJMOD}/parts/ldk130m33r.kicad_sym")(options "")(descr ""))
+)
