@@ -7,3 +7,5 @@ private
 *auto_saved_files*
 *.lck
 *.tmp
+*.log
+*cache*
