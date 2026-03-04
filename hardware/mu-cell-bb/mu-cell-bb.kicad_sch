@@ -8432,7 +8432,7 @@
 		)
 		(uuid "7b77a5a9-343e-45c3-8cad-3015b52a381c")
 	)
-	(label "SCL"
+	(label "SDA"
 		(at 267.97 72.39 180)
 		(effects
 			(font
@@ -8472,7 +8472,7 @@
 		)
 		(uuid "9a246d10-bf71-475b-b1d2-8d4c2300fbf1")
 	)
-	(label "SDA"
+	(label "SCL"
 		(at 229.87 72.39 0)
 		(effects
 			(font
@@ -8492,7 +8492,7 @@
 		)
 		(uuid "a11ed4f3-29bb-4cae-93f9-e91f18ebed24")
 	)
-	(label "TXD"
+	(label "RXD"
 		(at 267.97 69.85 180)
 		(effects
 			(font
@@ -8712,7 +8712,7 @@
 		)
 		(uuid "f80326cb-508b-435e-891a-506a2a5ec760")
 	)
-	(label "RXD"
+	(label "TXD"
 		(at 229.87 69.85 0)
 		(effects
 			(font
@@ -8952,7 +8952,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 240.03 74.93 0)
 			(effects
 				(font
@@ -8963,6 +8963,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 240.03 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 240.03 74.93 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9056,7 +9065,7 @@
 		(at 123.19 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -9240,7 +9249,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 157.48 129.54 0)
 			(effects
 				(font
@@ -9250,6 +9259,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 157.48 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 157.48 129.54 0)
 			(effects
 				(font
@@ -9327,7 +9345,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "80-C0603C103M4RECLR"
+		(property "PN" ""
 			(at 148.59 129.54 0)
 			(effects
 				(font
@@ -9337,6 +9355,15 @@
 			)
 		)
 		(property "MPN" "C0603C103M4REC7411"
+			(at 148.59 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60133"
 			(at 148.59 129.54 0)
 			(effects
 				(font
@@ -9414,7 +9441,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "80-C0603C103M4RECLR"
+		(property "PN" ""
 			(at 130.81 129.54 0)
 			(effects
 				(font
@@ -9424,6 +9451,15 @@
 			)
 		)
 		(property "MPN" "C0603C103M4REC7411"
+			(at 130.81 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60133"
 			(at 130.81 129.54 0)
 			(effects
 				(font
@@ -9499,7 +9535,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 71.12 133.35 0)
 			(effects
 				(font
@@ -9510,6 +9546,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 71.12 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2909346"
+			(at 71.12 133.35 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9537,7 +9582,7 @@
 		(at 102.87 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -9786,7 +9831,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "80-C0603C103M4RECLR"
+		(property "PN" ""
 			(at 166.37 129.54 0)
 			(effects
 				(font
@@ -9796,6 +9841,15 @@
 			)
 		)
 		(property "MPN" "C0603C103M4REC7411"
+			(at 166.37 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60133"
 			(at 166.37 129.54 0)
 			(effects
 				(font
@@ -9873,7 +9927,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "80-C0603C103M4RECLR"
+		(property "PN" ""
 			(at 20.32 142.24 0)
 			(effects
 				(font
@@ -9883,6 +9937,15 @@
 			)
 		)
 		(property "MPN" "C0603C103M4REC7411"
+			(at 20.32 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60133"
 			(at 20.32 142.24 0)
 			(effects
 				(font
@@ -9952,6 +10015,15 @@
 			)
 		)
 		(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"
+			(at 198.12 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C5137195"
 			(at 198.12 31.75 0)
 			(effects
 				(font
@@ -10030,7 +10102,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 101.6 86.36 0)
 			(effects
 				(font
@@ -10040,6 +10112,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 101.6 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 101.6 86.36 0)
 			(effects
 				(font
@@ -10246,7 +10327,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 58.42 133.35 0)
 			(effects
 				(font
@@ -10257,6 +10338,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 58.42 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2909346"
+			(at 58.42 133.35 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10482,7 +10572,7 @@
 		(at 252.73 33.02 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "2bfac5b7-01bb-4dfa-8cc3-1e18f55bc8b9")
@@ -10624,7 +10714,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -10749,8 +10839,17 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "815-AISC-0603-R039-J"
+		(property "PN" ""
 			(at 184.15 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C40399699"
+			(at 184.15 31.75 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10894,6 +10993,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC Part" "C383187"
+			(at 208.28 129.54 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d52a2aea-db3c-4b98-be45-eb9bc21b125b")
 		)
@@ -10967,7 +11075,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 20.32 182.88 0)
 			(effects
 				(font
@@ -10977,6 +11085,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 20.32 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C29266"
 			(at 20.32 182.88 0)
 			(effects
 				(font
@@ -11055,7 +11172,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 106.68 86.36 0)
 			(effects
 				(font
@@ -11065,6 +11182,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 106.68 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 106.68 86.36 0)
 			(effects
 				(font
@@ -11172,7 +11298,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LED_0603"
+		(property "Value" "Green"
 			(at 200.6599 105.41 90)
 			(effects
 				(font
@@ -11542,6 +11668,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC Part" "C383187"
+			(at 208.28 147.32 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "04ccf8b1-486c-4cfb-b696-ee3a0cfcb892")
 		)
@@ -11613,7 +11748,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 162.56 43.18 0)
 			(effects
 				(font
@@ -11624,6 +11759,15 @@
 		)
 		(property "MPN" "06035G104ZAT2A"
 			(at 162.56 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
+			(at 162.56 43.18 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11701,7 +11845,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 121.92 129.54 0)
 			(effects
 				(font
@@ -11711,6 +11855,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 121.92 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 121.92 129.54 0)
 			(effects
 				(font
@@ -11789,7 +11942,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 82.55 182.88 0)
 			(effects
 				(font
@@ -11799,6 +11952,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 82.55 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C23733"
 			(at 82.55 182.88 0)
 			(effects
 				(font
@@ -11875,7 +12037,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 191.77 144.78 0)
 			(effects
 				(font
@@ -11886,6 +12048,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 191.77 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106235"
+			(at 191.77 144.78 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11963,7 +12134,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 29.21 182.88 0)
 			(effects
 				(font
@@ -11973,6 +12144,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 29.21 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 29.21 182.88 0)
 			(effects
 				(font
@@ -12040,6 +12220,15 @@
 			)
 		)
 		(property "Description" "HCMOS Crystal Clock Oscillator, 2.5x2.0 mm SMD"
+			(at 40.64 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C48332760"
 			(at 40.64 72.39 0)
 			(effects
 				(font
@@ -12124,7 +12313,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 115.57 36.83 0)
 			(effects
 				(font
@@ -12133,7 +12322,16 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" ""
+			(at 115.57 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C1864373"
 			(at 115.57 36.83 0)
 			(effects
 				(font
@@ -12275,7 +12473,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 168.91 68.58 0)
 			(effects
 				(font
@@ -12286,6 +12484,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 168.91 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 168.91 68.58 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12360,7 +12567,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "603-AC0603JRNP9BN270"
+		(property "PN" ""
 			(at 140.97 20.32 0)
 			(effects
 				(font
@@ -12371,6 +12578,15 @@
 		)
 		(property "MPN" "AC0603JRNPO9BN270"
 			(at 140.97 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C3889037"
+			(at 140.97 20.32 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12446,7 +12662,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "77-VJ0603A330KXAPBC"
+		(property "PN" ""
 			(at 127 31.75 0)
 			(effects
 				(font
@@ -12455,8 +12671,17 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "VJ0603A330KXAPW1BC"
+		(property "MPN" ""
 			(at 127 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C437439"
+			(at 127 31.75 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12534,7 +12759,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 257.81 72.39 0)
 			(effects
 				(font
@@ -12545,6 +12770,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 257.81 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 257.81 72.39 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12651,7 +12885,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LED_0603"
+		(property "Value" "Yellow"
 			(at 200.6599 139.7 90)
 			(effects
 				(font
@@ -12887,7 +13121,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 205.74 134.62 0)
 			(effects
 				(font
@@ -12898,6 +13132,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 205.74 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106235"
+			(at 205.74 134.62 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13105,7 +13348,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 168.91 83.82 0)
 			(effects
 				(font
@@ -13116,6 +13359,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 168.91 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 168.91 83.82 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13934,6 +14186,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC Part" "C5137195"
+			(at 30.48 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f6281638-40c1-4f77-b4a3-55832ed3cdd4")
 		)
@@ -14004,7 +14265,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 240.03 67.31 0)
 			(effects
 				(font
@@ -14015,6 +14276,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 240.03 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 240.03 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14090,7 +14360,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 43.18 33.02 0)
 			(effects
 				(font
@@ -14101,6 +14371,15 @@
 		)
 		(property "MPN" "06035G104ZAT2A"
 			(at 43.18 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2941926"
+			(at 43.18 33.02 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14374,7 +14653,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 151.13 105.41 0)
 			(effects
 				(font
@@ -14384,6 +14663,15 @@
 			)
 		)
 		(property "MPN" "CRCW0603100RFKECC"
+			(at 151.13 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
 			(at 151.13 105.41 0)
 			(effects
 				(font
@@ -14527,7 +14815,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "80-C0603C103M4RECLR"
+		(property "PN" ""
 			(at 54.61 182.88 0)
 			(effects
 				(font
@@ -14537,6 +14825,15 @@
 			)
 		)
 		(property "MPN" "C0603C103M4REC7411"
+			(at 54.61 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60133"
 			(at 54.61 182.88 0)
 			(effects
 				(font
@@ -14631,7 +14928,7 @@
 		(at 58.42 148.59 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -14817,7 +15114,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 257.81 74.93 0)
 			(effects
 				(font
@@ -14828,6 +15125,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 257.81 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 257.81 74.93 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14971,7 +15277,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 102.87 36.83 0)
 			(effects
 				(font
@@ -14980,7 +15286,16 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" ""
+			(at 102.87 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C1864373"
 			(at 102.87 36.83 0)
 			(effects
 				(font
@@ -15057,7 +15372,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 168.91 78.74 0)
 			(effects
 				(font
@@ -15068,6 +15383,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 168.91 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 168.91 78.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15276,6 +15600,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC Part" "C5137195"
+			(at 91.44 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "90ad4048-1815-4ea7-8266-e2363bacfd40")
 		)
@@ -15346,7 +15679,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 111.76 86.36 0)
 			(effects
 				(font
@@ -15356,6 +15689,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 111.76 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 111.76 86.36 0)
 			(effects
 				(font
@@ -15431,7 +15773,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 64.77 133.35 0)
 			(effects
 				(font
@@ -15442,6 +15784,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 64.77 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2909346"
+			(at 64.77 133.35 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15716,7 +16067,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 257.81 69.85 0)
 			(effects
 				(font
@@ -15727,6 +16078,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 257.81 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 257.81 69.85 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15832,7 +16192,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "LED_0603"
+		(property "Value" "Red"
 			(at 200.6599 121.92 90)
 			(effects
 				(font
@@ -15937,7 +16297,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 191.77 127 0)
 			(effects
 				(font
@@ -15948,6 +16308,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 191.77 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106235"
+			(at 191.77 127 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15975,7 +16344,7 @@
 		(at 113.03 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -16093,7 +16462,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 63.5 182.88 0)
 			(effects
 				(font
@@ -16103,6 +16472,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 63.5 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C29266"
 			(at 63.5 182.88 0)
 			(effects
 				(font
@@ -16179,7 +16557,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 191.77 110.49 0)
 			(effects
 				(font
@@ -16190,6 +16568,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 191.77 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106235"
+			(at 191.77 110.49 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16483,7 +16870,7 @@
 		(at 207.01 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "b4a411d9-db1d-4470-935f-136c9f7d69c4")
@@ -16736,7 +17123,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW06033K9FKECC"
+		(property "PN" ""
 			(at 205.74 152.4 0)
 			(effects
 				(font
@@ -16747,6 +17134,15 @@
 		)
 		(property "MPN" "CRCW06033K9FKECC"
 			(at 205.74 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106235"
+			(at 205.74 152.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16824,7 +17220,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 240.03 72.39 0)
 			(effects
 				(font
@@ -16835,6 +17231,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 240.03 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 240.03 72.39 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17052,7 +17457,16 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "815-AISC-0603-R082-J"
+		(property "PN" ""
+			(at 179.07 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C38907014"
 			(at 179.07 36.83 0)
 			(effects
 				(font
@@ -17197,7 +17611,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 240.03 69.85 0)
 			(effects
 				(font
@@ -17208,6 +17622,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 240.03 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 240.03 69.85 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17282,7 +17705,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 38.1 36.83 0)
 			(effects
 				(font
@@ -17293,6 +17716,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 38.1 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C26083"
+			(at 38.1 36.83 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17362,6 +17794,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 151.13 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C22418535"
 			(at 151.13 184.15 0)
 			(effects
 				(font
@@ -17567,7 +18008,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 138.43 105.41 0)
 			(effects
 				(font
@@ -17577,6 +18018,15 @@
 			)
 		)
 		(property "MPN" "CRCW0603100RFKECC"
+			(at 138.43 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
 			(at 138.43 105.41 0)
 			(effects
 				(font
@@ -17784,7 +18234,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 146.05 105.41 0)
 			(effects
 				(font
@@ -17794,6 +18244,15 @@
 			)
 		)
 		(property "MPN" "CRCW0603100RFKECC"
+			(at 146.05 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
 			(at 146.05 105.41 0)
 			(effects
 				(font
@@ -17864,6 +18323,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 44.45 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2969807"
 			(at 44.45 177.8 0)
 			(effects
 				(font
@@ -18083,7 +18551,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "80-C0603C103M4RECLR"
+		(property "PN" ""
 			(at 24.13 72.39 0)
 			(effects
 				(font
@@ -18093,6 +18561,15 @@
 			)
 		)
 		(property "MPN" "C0603C103M4REC7411"
+			(at 24.13 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60133"
 			(at 24.13 72.39 0)
 			(effects
 				(font
@@ -18244,8 +18721,17 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "815-AISC-0603-R039-J"
+		(property "PN" ""
 			(at 109.22 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C39885562"
+			(at 109.22 31.75 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18315,6 +18801,15 @@
 			)
 		)
 		(property "Description" "I2C Serial EEPROM, 256Kb, DIP-8/SOIC-8/TSSOP-8/DFN-8"
+			(at 40.64 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C615210"
 			(at 40.64 140.97 0)
 			(effects
 				(font
@@ -18457,6 +18952,15 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C89372"
+			(at 128.27 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
@@ -18821,7 +19325,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 257.81 67.31 0)
 			(effects
 				(font
@@ -18832,6 +19336,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 257.81 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 257.81 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18975,7 +19488,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 72.39 182.88 0)
 			(effects
 				(font
@@ -18985,6 +19498,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 72.39 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 72.39 182.88 0)
 			(effects
 				(font
@@ -19013,7 +19535,7 @@
 		(at 133.35 181.61 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -19131,7 +19653,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "581-06035G104Z"
+		(property "PN" ""
 			(at 139.7 129.54 0)
 			(effects
 				(font
@@ -19141,6 +19663,15 @@
 			)
 		)
 		(property "MPN" "06035G104ZAT2A"
+			(at 139.7 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C60474"
 			(at 139.7 129.54 0)
 			(effects
 				(font
@@ -19169,7 +19700,7 @@
 		(at 247.65 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -19381,7 +19912,7 @@
 				(hide yes)
 			)
 		)
-		(property "PN" "CRCW0603100RFKECC"
+		(property "PN" ""
 			(at 168.91 81.28 0)
 			(effects
 				(font
@@ -19392,6 +19923,15 @@
 		)
 		(property "MPN" "CRCW0603100RFKECC"
 			(at 168.91 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C106232"
+			(at 168.91 81.28 90)
 			(effects
 				(font
 					(size 1.27 1.27)
