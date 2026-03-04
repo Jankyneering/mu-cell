@@ -2684,13 +2684,13 @@
 			(exclude_from_sim no)
 			(in_bom no)
 			(on_board no)
-			(property "Reference" "LOGO"
-				(at 0 0 0)
+			(property "Reference" "XX"
+				(at 0 -4.572 0)
+				(do_not_autoplace)
 				(effects
 					(font
-						(size 1.27 1.27)
+						(size 1.5 1.5)
 					)
-					(hide yes)
 				)
 			)
 			(property "Value" ""
@@ -2941,14 +2941,6 @@
 					)
 					(fill
 						(type background)
-					)
-				)
-				(text "XX000000"
-					(at 0 -4.572 0)
-					(effects
-						(font
-							(size 1.5 1.5)
-						)
 					)
 				)
 			)
@@ -16874,70 +16866,6 @@
 		)
 	)
 	(symbol
-		(lib_id "OSHW:OSHW_Certification_Mark_Stacked_Medium")
-		(at 274.32 172.72 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "aed59114-07c0-491f-a257-0331642b58f6")
-		(property "Reference" "LOGO1"
-			(at 274.32 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "~"
-			(at 274.32 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "OSHW:OSHW-Certification-Mark-Stacked_8x7mm_SilkMask"
-			(at 274.32 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 274.32 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "OSHW Certification Mark, Stacked"
-			(at 274.32 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
-					(reference "LOGO1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector_Generic:Conn_02x20_Odd_Even")
 		(at 247.65 129.54 0)
 		(unit 1)
@@ -17132,6 +17060,70 @@
 			(project "mu-cell-bb"
 				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
 					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "OSHW:OSHW_Certification_Mark_Stacked_Medium")
+		(at 275.59 172.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b00f2dfa-d87d-4ea2-8bfc-c1ece8b58f23")
+		(property "Reference" "BE000000"
+			(at 275.59 177.292 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1.5 1.5)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 275.59 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "OSHW:OSHW-Certification-Mark-Stacked_8x7mm_SilkMask"
+			(at 275.59 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 275.59 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "OSHW Certification Mark, Stacked"
+			(at 275.59 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
+					(reference "BE000000")
 					(unit 1)
 				)
 			)
