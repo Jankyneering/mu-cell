@@ -8,7 +8,7 @@ An open-source SDR base station.
 - [Hardware](#hardware)
 - [Software](#software)
 - [How to Contribute](#how-to-contribute)
-- [License & Acknowledgements](#license--acknowledgements)
+- [Acknowledgements & License](#acknowledgements--license)
 
 ## Hardware
 
@@ -115,8 +115,8 @@ These utilities are intended to simplify operating µCell hardware as an integra
 Contributions to µCell are welcome. If you have improvements, fixes, documentation updates, or new ideas for either the hardware or software, feel free to open an issue to discuss it or submit a pull request directly. For larger changes, opening an issue first is recommended so the approach can be discussed. 
 Please keep pull requests focused and include clear descriptions of the changes and any relevant documentation updates.
 
-## Acknowledgements & 
-License 
+## Acknowledgements & License 
+
 µCell builds on the work of several open-source projects and contributors in the SDR and TETRA experimentation communities.
 
 Tatu Peltola  
