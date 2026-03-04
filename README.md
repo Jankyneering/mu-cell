@@ -74,7 +74,6 @@ Intended features:
 - Control interface  
 - Integration with the BlueStation/µCell software stack for monitoring and configuration  
 
----
 
 ## Software
 
@@ -110,7 +109,6 @@ Supporting software components for platform integration, which may include:
 
 These utilities are intended to simplify operating µCell hardware as an integrated system.
 
----
 
 ## How to contribute
 
