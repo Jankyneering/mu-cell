@@ -1,6 +1,10 @@
-# µCell
+<h1 align="center">µCell</h1>
 
-An open-source SDR base station.
+<p align="center">
+	<img width="200" height="200" margin-right="100%" src="/docs/logos/mu-cell_logo.svg" alt="µCell logo">
+</p>
+
+<p align="center">An open-source SDR base station.</p>
 
 ## Contents
 
