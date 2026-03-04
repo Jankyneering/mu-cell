@@ -74,7 +74,6 @@ Intended features:
 - Control interface  
 - Integration with the BlueStation/µCell software stack for monitoring and configuration  
 
-
 ## Software
 
 The `Software` directory contains the software components required to operate µCell hardware.
@@ -85,14 +84,11 @@ Because µCell is built around an SDR architecture, multiple software stacks may
 
 ### Components
 
-#### Bluestation
+#### [Tetra-Bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation)
 
 Main TETRA base station software responsible for implementing the TETRA protocol stack and base station behavior.
 
-Repository:  
-https://github.com/MidnightBlueLabs/tetra-bluestation
-
-#### SoapySX
+#### [SoapySX](https://github.com/tejeez/sxxcvr/tree/main/SoapySX)
 
 SoapySDR driver used to interface the SX1255 transceiver with Bluestation and other SDR software.
 
@@ -109,24 +105,20 @@ Supporting software components for platform integration, which may include:
 
 These utilities are intended to simplify operating µCell hardware as an integrated system.
 
-
 ## How to contribute
 
-Contributions to µCell are welcome. If you have improvements, fixes, documentation updates, or new ideas for either the hardware or software, feel free to open an issue to discuss it or submit a pull request directly. For larger changes, opening an issue first is recommended so the approach can be discussed. 
+Contributions to µCell are welcome. If you have improvements, fixes, documentation updates, or new ideas for either the hardware or software, feel free to open an issue to discuss it or submit a pull request directly. For larger changes, opening an issue first is recommended so the approach can be discussed.  
 Please keep pull requests focused and include clear descriptions of the changes and any relevant documentation updates.
 
-## Acknowledgements & License 
+## Acknowledgements & License
 
-µCell builds on the work of several open-source projects and contributors in the SDR and TETRA experimentation communities.
+µCell builds on the work of several open-source projects and contributors in the SDR and TETRA experimentation communities :
 
-Tatu Peltola  
-Designer of the SxCeiver hardware, which provided early inspiration for compact SX1255-based SDR radio hardware.
+- Tatu Peltola ([tejeez](https://github.com/tejeez/))  
+Designer of the [SXCeiver](https://github.com/tejeez/sxxcvr) hardware, which provided early inspiration for compact SX1255-based SDR radio hardware.
 
-Wouter Bokslag (Midnight Blue) and contributors  
-Author of the TETRA-bluestation project, which implements an open TETRA base station stack.
-
-Bluestation repository:  
-https://github.com/MidnightBlueLabs/tetra-bluestation
+- Wouter Bokslag ([Midnight Blue](https://github.com/MidnightBlueLabs/)) and contributors  
+Author of the [TETRA-bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation-) project, which implements an open TETRA base station stack.
 
 We also acknowledge the broader SDR and SoapySDR communities whose work enables hardware experimentation with modern radio systems.
 
@@ -135,7 +127,7 @@ Made with ❤️, lots of ☕️, and lack of 🛌
 Hardware & Documentation published under CreativeCommons BY-SA 4.0
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)  
-This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 Software published under GNU GPLv3
 
