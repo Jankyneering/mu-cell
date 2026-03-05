@@ -17075,7 +17075,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b00f2dfa-d87d-4ea2-8bfc-c1ece8b58f23")
-		(property "Reference" "BE000000"
+		(property "Reference" "BE000024"
 			(at 275.59 177.292 0)
 			(do_not_autoplace yes)
 			(effects
@@ -17123,7 +17123,7 @@
 		(instances
 			(project ""
 				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
-					(reference "BE000000")
+					(reference "BE000024")
 					(unit 1)
 				)
 			)
