@@ -10,3 +10,4 @@ private
 *.log
 *cache*
 *bak*
+*autosave*

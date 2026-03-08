@@ -562,6 +562,12 @@
       ],
       "Net-(C24-Pad1)": [
         "RF"
+      ],
+      "Net-(C4-Pad1)": [
+        "RF"
+      ],
+      "Net-(C6-Pad1)": [
+        "RF"
       ]
     },
     "netclass_patterns": [
