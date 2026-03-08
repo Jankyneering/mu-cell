@@ -119,7 +119,7 @@ Please keep pull requests focused and include clear descriptions of the changes 
 µCell builds on the work of several open-source projects and contributors in the SDR and TETRA experimentation communities :
 
 - Tatu Peltola ([tejeez](https://github.com/tejeez/))  
-Designer of the [SXCeiver](https://github.com/tejeez/sxxcvr) hardware, which provided early inspiration for compact SX1255-based SDR radio hardware.
+Designer of the [SXCeiver](https://github.com/tejeez/sxxcvr) hardware, which provided early inspiration for compact SX1255-based SDR radio hardware, and amazing insights for component selection and design.
 
 - Wouter Bokslag ([Midnight Blue](https://github.com/MidnightBlueLabs/)) and contributors  
 Author of the [TETRA-bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation-) project, which implements an open TETRA base station stack.
