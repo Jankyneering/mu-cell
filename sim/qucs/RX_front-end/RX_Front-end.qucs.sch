@@ -1,6 +1,6 @@
 <Qucs Schematic 25.2.0>
 <Properties>
-  <View=-70,-258,1685,878,0.992734,0,0>
+  <View=-23,-231,1732,832,1.84861,817,828>
   <Grid=10,10,1>
   <DataSet=RX_Front-end.qucs.dat>
   <DataDisplay=RX_Front-end.qucs.dpl>
@@ -26,8 +26,8 @@
   <GND * 1 720 510 0 0 0 0>
   <Pac P2 1 1010 440 18 -26 0 1 "2" 1 "220 Ohm" 1 "0 dBm" 0 "1 MHz" 0 "26.85" 0 "true" 0>
   <C C2 1 960 440 17 -26 0 1 "6 pF" 1 "" 0 "neutral" 0>
-  <L L1 1 780 390 -26 10 0 0 "39 nH" 1 "" 0>
   <L L2 1 860 440 10 -26 0 1 "39 nH" 1 "" 0>
+  <L L1 1 780 390 -26 10 0 0 "39 nH" 1 "" 0>
 </Components>
 <Wires>
   <810 390 860 390 "" 0 0 0 "">
