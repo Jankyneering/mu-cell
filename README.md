@@ -44,7 +44,13 @@ Features:
 - Stable reference clock  
 - EEPROM for HAT identification  
 - Designed to operate standalone as a compact hotspot  
-- Acts as the RF/baseband front-end when paired with external PA boards  
+- Acts as the RF/baseband front-end when paired with external PA boards
+
+
+Measured specifications on v1.0: 
+
+- Tx Power (Pi/4 DQPSK): 3-5dBm
+- Rx Sensitivity (TETRA - T1): -117dBm
 
 #### µCell PA Mini
 
@@ -56,7 +62,7 @@ Features:
 - Receive path conditioning including LNA  
 - Preselector filtering  
 - RF measurement and monitoring points  
-- Intended for compact deployments where modest output power is sufficient  
+- Intended for compact deployments where modest output power is sufficient
 
 #### µCell PA 10W (planned)
 
