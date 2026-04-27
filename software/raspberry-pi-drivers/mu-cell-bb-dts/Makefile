@@ -57,12 +57,9 @@ $(BUILD_DIR)/.settings_written: Makefile | $(BUILD_DIR)
 	@echo "product_id 0x1255"                >> $(BUILD_DIR)/eeprom_settings.txt
 	@echo "product_ver $(HAT_VERSION)"       >> $(BUILD_DIR)/eeprom_settings.txt
 	@echo 'vendor "Jankyneering"'            >> $(BUILD_DIR)/eeprom_settings.txt
-	@echo 'product "uCell-BB"'               >> $(BUILD_DIR)/eeprom_settings.txt
+	@echo 'product "µCell-BB"'               >> $(BUILD_DIR)/eeprom_settings.txt
 	@echo "current_supply 5000"              >> $(BUILD_DIR)/eeprom_settings.txt
 	@echo 'dt_blob "mu-cell-bb_raspberrypi"' >> $(BUILD_DIR)/eeprom_settings.txt
-	@echo "custom_data"                      >> $(BUILD_DIR)/eeprom_settings.txt
-	@echo "deadbeef c00 1c0d e"              >> $(BUILD_DIR)/eeprom_settings.txt
-	@echo "end"                              >> $(BUILD_DIR)/eeprom_settings.txt
 	@touch $@
 
 $(BUILD_DIR)/eeprom_settings.txt: $(BUILD_DIR)/.settings_written
