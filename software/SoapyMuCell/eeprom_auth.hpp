@@ -247,109 +247,191 @@ cleanup:
 
 // ── Main entry point ─────────────────────────────────────────────────────────
 
-// The Pi firmware exposes raw EEPROM bytes (all atoms) at this path.
-// The file contains the binary image starting at offset 0 (full HAT+ image).
-static constexpr const char *EEPROM_DT_PATH = "/sys/firmware/devicetree/base/hat/custom_0";
-// Fallback used on some older firmware versions:
-static constexpr const char *EEPROM_DT_PATH_ALT = "/proc/device-tree/hat/custom_0";
+// The Pi firmware exposes each custom atom's raw *payload* as a separate
+// file under /proc/device-tree/hat/ (or the /sys/firmware equivalent):
+//   custom_0 → payload of first  custom atom (SNUM in our layout)
+//   custom_1 → payload of second custom atom (RSIG in our layout)
+//   vendor   → vendor string
+//   product  → product string
+//   uuid     → 16 raw UUID bytes
+//   product_id  → 2-byte big-endian product ID
+//   product_ver → 2-byte big-endian product version
+//
+// There is NO file header and NO atom header in these files — just payload.
+// We also need the full raw EEPROM image to reconstruct the signed payload;
+// that is read from /sys/bus/i2c/../eeprom or built from the DT files.
+
+static constexpr const char *HAT_DT_BASE      = "/proc/device-tree/hat";
+static constexpr const char *HAT_DT_BASE_SYS  = "/sys/firmware/devicetree/base/hat";
+
+// ── Helper: read a device-tree hat file into a byte vector ───────────────────
+static bool dt_read(const std::string &base, const std::string &name,
+                    std::vector<uint8_t> &out)
+{
+    for (const auto &b : { base, std::string(HAT_DT_BASE_SYS),
+                                  std::string(HAT_DT_BASE) }) {
+        std::ifstream f(b + "/" + name, std::ios::binary);
+        if (f.is_open()) {
+            out.assign(std::istreambuf_iterator<char>(f),
+                       std::istreambuf_iterator<char>());
+            return true;
+        }
+    }
+    return false;
+}
+
+static std::string dt_read_string(const std::string &base, const std::string &name)
+{
+    std::vector<uint8_t> buf;
+    if (!dt_read(base, name, buf)) return "";
+    // Trim trailing NUL bytes added by the firmware
+    while (!buf.empty() && buf.back() == 0) buf.pop_back();
+    return std::string(buf.begin(), buf.end());
+}
 
 static EepromInfo read_and_verify_eeprom()
 {
     EepromInfo info;
 
-    // ── Read raw EEPROM image ─────────────────────────────────────────────
-    std::vector<uint8_t> img;
+    // Find which base path exists
+    std::string base;
+    for (const char *b : { HAT_DT_BASE_SYS, HAT_DT_BASE }) {
+        if (std::ifstream(std::string(b) + "/product_id").is_open()) {
+            base = b;
+            break;
+        }
+    }
+    if (base.empty()) {
+        info.auth = AuthResult::EEPROM_NOT_FOUND;
+        return info;
+    }
+
+    // ── Vendor info from individual DT files ──────────────────────────────
+    // uuid: 16 raw bytes in RFC 4122 big-endian order
     {
-        const char *paths[] = { EEPROM_DT_PATH, EEPROM_DT_PATH_ALT, nullptr };
-        std::ifstream f;
-        for (int i = 0; paths[i]; i++) {
-            f.open(paths[i], std::ios::binary);
-            if (f.is_open()) break;
-        }
-        if (!f.is_open()) {
-            info.auth = AuthResult::EEPROM_NOT_FOUND;
-            return info;
-        }
-        img.assign(std::istreambuf_iterator<char>(f),
-                   std::istreambuf_iterator<char>());
-    }
-
-    if (img.size() < 12) {
-        info.auth = AuthResult::PARSE_ERROR;
-        return info;
-    }
-
-    // ── Parse atoms ───────────────────────────────────────────────────────
-    size_t sig_atom_offset   = SIZE_MAX;
-    std::vector<uint8_t> signature_bytes;
-    uint32_t rsig_flags      = 0;
-
-    bool ok = iter_atoms(img, [&](const Atom &a) -> bool {
-
-        if (a.type == ATOM_TYPE_VENDOR && a.payload_len >= 22) {
+        std::vector<uint8_t> uuid_bytes;
+        if (dt_read(base, "uuid", uuid_bytes) && uuid_bytes.size() >= 16) {
             info.has_vendor_info = true;
-            info.uuid            = format_uuid(a.payload);
-            info.product_id      = le16(a.payload + 16);
-            info.product_ver     = le16(a.payload + 18);
-            uint8_t vslen        = a.payload[20];
-            uint8_t pslen        = a.payload[21];
-            if ((size_t)(22 + vslen) <= a.payload_len)
-                info.vendor_str  = std::string((const char*)a.payload + 22, vslen > 0 ? vslen - 1 : 0);
-            if ((size_t)(22 + vslen + pslen) <= a.payload_len)
-                info.product_str = std::string((const char*)a.payload + 22 + vslen, pslen > 0 ? pslen - 1 : 0);
+            info.uuid = format_uuid(uuid_bytes.data());
         }
+    }
+    {
+        std::vector<uint8_t> buf;
+        // product_id and product_ver are 4-byte big-endian in the DT
+        // (the firmware stores them as 32-bit BE even though the spec uses 16-bit)
+        if (dt_read(base, "product_id", buf) && buf.size() >= 2) {
+            // Take last 2 bytes (covers both 2-byte and 4-byte representations)
+            size_t o = buf.size() - 2;
+            info.product_id = (uint16_t)(buf[o] << 8) | buf[o+1];
+            info.has_vendor_info = true;
+        }
+        if (dt_read(base, "product_ver", buf) && buf.size() >= 2) {
+            size_t o = buf.size() - 2;
+            info.product_ver = (uint16_t)(buf[o] << 8) | buf[o+1];
+        }
+    }
+    info.vendor_str  = dt_read_string(base, "vendor");
+    info.product_str = dt_read_string(base, "product");
+    if (!info.vendor_str.empty() || !info.product_str.empty())
+        info.has_vendor_info = true;
 
-        if (a.type == ATOM_TYPE_CUSTOM && a.payload_len >= 8
-            && memcmp(a.payload, SNUM_MAGIC, 4) == 0) {
+    // ── Custom atom payloads ──────────────────────────────────────────────
+    // Scan custom_0, custom_1, ... until no more files exist
+    std::vector<uint8_t> signature_bytes;
+    uint32_t rsig_flags = 0;
+
+    // We also need to reconstruct the signed payload.
+    // The signing tool signs: [full EEPROM image up to RSIG atom header]
+    // Since we don't have the raw image here, we reconstruct the signed
+    // portion from the DT files by reading the full EEPROM over I2C.
+    // However, the simplest approach that works without I2C access is to
+    // read /sys/bus/i2c/devices/.../eeprom if available, otherwise fall
+    // back to building the payload from DT atom payloads directly.
+    //
+    // For now: scan custom_N files to find SNUM and RSIG payloads.
+    std::vector<std::pair<std::string,std::vector<uint8_t>>> custom_atoms;
+    for (int i = 0; i < 16; i++) {
+        std::vector<uint8_t> buf;
+        if (!dt_read(base, "custom_" + std::to_string(i), buf)) break;
+        custom_atoms.push_back({ "custom_" + std::to_string(i), buf });
+    }
+
+    for (auto &[name, payload] : custom_atoms) {
+        if (payload.size() >= 4 && memcmp(payload.data(), SNUM_MAGIC, 4) == 0) {
             info.has_serial = true;
-            // Serial is ASCII, null-terminated or length-bounded
-            size_t slen = a.payload_len - 4;
-            // Trim any trailing null
-            while (slen > 0 && a.payload[4 + slen - 1] == '\0') slen--;
-            info.serial = std::string((const char*)a.payload + 4, slen);
+            size_t slen = payload.size() - 4;
+            while (slen > 0 && payload[4 + slen - 1] == '\0') slen--;
+            info.serial = std::string((const char*)payload.data() + 4, slen);
         }
-
-        if (a.type == ATOM_TYPE_CUSTOM && a.payload_len >= 8
-            && memcmp(a.payload, RSIG_MAGIC, 4) == 0) {
-            sig_atom_offset = a.atom_offset;
-            rsig_flags      = le32(a.payload + 4);
-            // Signature bytes start at payload[8]
-            if (a.payload_len > 8) {
-                signature_bytes.assign(a.payload + 8, a.payload + a.payload_len);
-            }
+        if (payload.size() >= 8 && memcmp(payload.data(), RSIG_MAGIC, 4) == 0) {
+            rsig_flags = le32(payload.data() + 4);
+            if (payload.size() > 8)
+                signature_bytes.assign(payload.begin() + 8, payload.end());
         }
-
-        return true; // continue
-    });
-
-    if (!ok) {
-        info.auth = AuthResult::PARSE_ERROR;
-        return info;
     }
 
     // ── Check we found a signature ────────────────────────────────────────
-    if (sig_atom_offset == SIZE_MAX || signature_bytes.empty()) {
+    if (signature_bytes.empty()) {
         info.auth = AuthResult::NO_SIGNATURE;
         return info;
     }
-
     if (EMBEDDED_KEYS_COUNT == 0) {
         info.auth = AuthResult::NO_KEYS;
         return info;
     }
-
-    // PSS flag must be set (bit 0)
     if (!(rsig_flags & 0x1)) {
         info.auth = AuthResult::VERIFY_ERROR;
         return info;
     }
 
-    // ── Reconstruct the signed payload ───────────────────────────────────
-    // The signed payload is every byte of the image up to (but not including)
-    // the RSIG atom header, with numatoms and eeplen already reflecting
-    // the final state (they are correct in the stored image).
-    std::vector<uint8_t> signed_payload(img.begin(),
-                                         img.begin() + sig_atom_offset);
+    // ── Reconstruct the signed payload from the raw EEPROM image ─────────
+    // The signing tool signs the full binary image up to (not including) the
+    // RSIG atom header. We need to read the raw EEPROM to get that exact
+    // byte sequence. Try the I2C EEPROM sysfs path first, then fall back to
+    // reading /sys/bus/i2c/../eeprom. The HAT EEPROM is always on i2c-0 at
+    // address 0x50 on Raspberry Pi.
+    std::vector<uint8_t> raw_image;
+    {
+        // Common sysfs paths for the HAT EEPROM on Raspberry Pi
+        const char *eeprom_paths[] = {
+            "/sys/bus/i2c/devices/0-0050/eeprom",
+            "/sys/bus/i2c/devices/i2c-0/0-0050/eeprom",
+            nullptr
+        };
+        for (int i = 0; eeprom_paths[i]; i++) {
+            std::ifstream f(eeprom_paths[i], std::ios::binary);
+            if (f.is_open()) {
+                raw_image.assign(std::istreambuf_iterator<char>(f),
+                                 std::istreambuf_iterator<char>());
+                break;
+            }
+        }
+    }
+
+    if (raw_image.size() < 12 || le32(raw_image.data()) != HATPLUS_MAGIC) {
+        // Raw image unavailable or invalid — cannot verify signature
+        info.auth = AuthResult::PARSE_ERROR;
+        return info;
+    }
+
+    // Find the RSIG atom in the raw image to get its offset
+    size_t sig_atom_offset = SIZE_MAX;
+    iter_atoms(raw_image, [&](const Atom &a) -> bool {
+        if (a.type == ATOM_TYPE_CUSTOM && a.payload_len >= 8
+            && memcmp(a.payload, RSIG_MAGIC, 4) == 0) {
+            sig_atom_offset = a.atom_offset;
+            return false; // stop
+        }
+        return true;
+    });
+
+    if (sig_atom_offset == SIZE_MAX) {
+        info.auth = AuthResult::NO_SIGNATURE;
+        return info;
+    }
+
+    std::vector<uint8_t> signed_payload(raw_image.begin(),
+                                         raw_image.begin() + sig_atom_offset);
 
     // ── Try each compiled-in public key ──────────────────────────────────
     for (size_t i = 0; i < EMBEDDED_KEYS_COUNT; i++) {
