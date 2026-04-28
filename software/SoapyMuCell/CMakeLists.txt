@@ -80,10 +80,23 @@ set(VERSION_SCRIPT "${CMAKE_SOURCE_DIR}/version.sh")
 
 find_package(Git REQUIRED)
 
+# Use git dir relative to source tree — works whether this is a standalone
+# repo or a subdirectory of a larger repo.
+execute_process(
+    COMMAND "${GIT_EXECUTABLE}" -C "${CMAKE_SOURCE_DIR}" rev-parse --git-dir
+    OUTPUT_VARIABLE GIT_DIR
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+)
+# Make path absolute if git returned a relative one
+if(NOT IS_ABSOLUTE "${GIT_DIR}")
+    set(GIT_DIR "${CMAKE_SOURCE_DIR}/${GIT_DIR}")
+endif()
+
 add_custom_command(
     OUTPUT ${VERSION_SOURCE_FILE}
     COMMAND "${VERSION_SCRIPT}" "${GIT_EXECUTABLE}" > "${VERSION_SOURCE_FILE}"
-    DEPENDS ../.git/index ${VERSION_SCRIPT} ${MY_SOURCE_FILES}
+    DEPENDS "${GIT_DIR}/index" ${VERSION_SCRIPT} ${MY_SOURCE_FILES}
 )
 
 ########################################################################

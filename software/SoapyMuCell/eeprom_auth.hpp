@@ -16,6 +16,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <functional>
 #include <vector>
 
 #include <openssl/evp.h>
@@ -292,9 +293,9 @@ static EepromInfo read_and_verify_eeprom()
             info.product_ver     = le16(a.payload + 18);
             uint8_t vslen        = a.payload[20];
             uint8_t pslen        = a.payload[21];
-            if (22 + vslen <= a.payload_len)
+            if ((size_t)(22 + vslen) <= a.payload_len)
                 info.vendor_str  = std::string((const char*)a.payload + 22, vslen > 0 ? vslen - 1 : 0);
-            if (22 + vslen + pslen <= a.payload_len)
+            if ((size_t)(22 + vslen + pslen) <= a.payload_len)
                 info.product_str = std::string((const char*)a.payload + 22 + vslen, pslen > 0 ? pslen - 1 : 0);
         }
 

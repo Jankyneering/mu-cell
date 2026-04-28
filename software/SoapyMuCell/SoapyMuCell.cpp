@@ -108,7 +108,7 @@ static struct hat_info read_hat_info(void)
     switch (info.eeprom.auth) {
         case AuthResult::OK:
             SoapySDR_logf(SOAPY_SDR_INFO,
-                "HAT authenticity: GENUINE — signed by key "%s"",
+                "HAT authenticity: GENUINE - signed by key \"%s\"",  
                 info.eeprom.matched_key_name.c_str());
             break;
         case AuthResult::NO_SIGNATURE:
