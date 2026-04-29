@@ -153,7 +153,7 @@ struct EepromInfo {
 // Calls cb(atom) for each valid atom in the image.
 // Returns false if the header is malformed.
 
-static bool iter_atoms(const std::vector<uint8_t> &img,
+[[maybe_unused]] static bool iter_atoms(const std::vector<uint8_t> &img,
                        std::function<bool(const Atom &)> cb)
 {
     if (img.size() < 12) return false;
@@ -416,18 +416,18 @@ static EepromInfo read_and_verify_eeprom()
     };
 
     // ── Reconstruct vendor atom payload from DT fields ────────────────────
-    // UUID: DT gives "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" ASCII string.
-    // We parse it back to 16 raw bytes.
+    // UUID: the Pi firmware stores the atom's raw 16 bytes in REVERSE order
+    // when formatting the DT string.  So to recover the original atom bytes
+    // we parse the DT string to 16 bytes then reverse the whole sequence.
     std::vector<uint8_t> uuid_raw;
     {
-        std::string s = info.uuid; // already parsed above
-        // Remove dashes and decode hex pairs
+        std::string s = info.uuid;
         std::string hex;
         for (char c : s) if (c != '-') hex += c;
         if (hex.size() == 32) {
-            for (size_t i = 0; i < 16; i++) {
-                uuid_raw.push_back((uint8_t)std::stoul(hex.substr(i*2,2), nullptr, 16));
-            }
+            for (size_t i = 0; i < 16; i++)
+                uuid_raw.push_back((uint8_t)std::stoul(hex.substr(i*2, 2), nullptr, 16));
+            std::reverse(uuid_raw.begin(), uuid_raw.end());
         }
     }
     if (uuid_raw.size() != 16) {
@@ -435,11 +435,12 @@ static EepromInfo read_and_verify_eeprom()
         return info;
     }
 
-    // Encode vendor and product strings with NUL terminator
-    std::string vstr = info.vendor_str + ' ';
-    std::string pstr = info.product_str + ' ';
-    uint8_t vslen = (uint8_t)vstr.size();
-    uint8_t pslen = (uint8_t)pstr.size();
+    // Encode vendor and product strings as raw UTF-8, NO NUL terminator.
+    // vslen/pslen in the HAT+ atom = byte length of string only, no NUL.
+    std::vector<uint8_t> vbytes(info.vendor_str.begin(),  info.vendor_str.end());
+    std::vector<uint8_t> pbytes(info.product_str.begin(), info.product_str.end());
+    uint8_t vslen = (uint8_t)vbytes.size();
+    uint8_t pslen = (uint8_t)pbytes.size();
 
     std::vector<uint8_t> vendor_payload;
     vendor_payload.insert(vendor_payload.end(), uuid_raw.begin(), uuid_raw.end());
@@ -450,8 +451,8 @@ static EepromInfo read_and_verify_eeprom()
     vendor_payload.push_back(info.product_ver >> 8);
     vendor_payload.push_back(vslen);
     vendor_payload.push_back(pslen);
-    vendor_payload.insert(vendor_payload.end(), vstr.begin(), vstr.end());
-    vendor_payload.insert(vendor_payload.end(), pstr.begin(), pstr.end());
+    vendor_payload.insert(vendor_payload.end(), vbytes.begin(), vbytes.end());
+    vendor_payload.insert(vendor_payload.end(), pbytes.begin(), pbytes.end());
 
     // ── Fixed atoms (product-specific, not exposed by DT) ─────────────────
     // Atom 0x0003: Linux DT overlay blob name — fixed for µCell
