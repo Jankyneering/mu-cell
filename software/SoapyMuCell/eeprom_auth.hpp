@@ -149,18 +149,6 @@ struct EepromInfo {
     }
 };
 
-// ── Format UUID bytes (16 bytes, RFC 4122 big-endian) ────────────────────────
-
-static std::string format_uuid(const uint8_t *b)
-{
-    char buf[37];
-    snprintf(buf, sizeof(buf),
-        "%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x",
-        b[0],b[1],b[2],b[3], b[4],b[5], b[6],b[7],
-        b[8],b[9], b[10],b[11],b[12],b[13],b[14],b[15]);
-    return std::string(buf);
-}
-
 // ── Atom iterator ─────────────────────────────────────────────────────────────
 // Calls cb(atom) for each valid atom in the image.
 // Returns false if the header is malformed.
@@ -383,55 +371,137 @@ static EepromInfo read_and_verify_eeprom()
         return info;
     }
 
-    // ── Reconstruct the signed payload from the raw EEPROM image ─────────
-    // The signing tool signs all bytes up to (not including) the RSIG atom
-    // header.  The raw image is available via the kernel's i2c-dev sysfs
-    // eeprom interface.  Try several common paths.
-    std::vector<uint8_t> raw_image;
+    // ── Reconstruct the signed payload from device-tree files ───────────
+    //
+    // The Pi firmware does NOT expose the raw EEPROM image — it parses it
+    // and serves individual fields.  We reconstruct the exact byte sequence
+    // that was signed by rebuilding each atom from DT data:
+    //
+    //  Atom 0x0001 (vendor)  : rebuilt from uuid/product_id/product_ver/
+    //                          vendor/product DT string files.
+    //  Atom 0x0003 (DT blob) : product-fixed string, hardcoded below.
+    //  Atom 0x0006 (GPIO map): product-fixed 4-byte value, hardcoded below.
+    //  Atom 0x0004 SNUM      : payload from custom_0 DT file.
+    //
+    // These four atoms, preceded by the 12-byte file header, form the
+    // exact byte range that the signing tool signed.
+
+    // ── Helper: append a complete atom (header + payload + CRC) ──────────
+    auto append_atom = [](std::vector<uint8_t> &out,
+                          uint16_t atype, uint16_t acount,
+                          const std::vector<uint8_t> &payload)
     {
-        const char *eeprom_paths[] = {
-            "/sys/bus/i2c/devices/0-0050/eeprom",
-            "/sys/bus/i2c/devices/1-0050/eeprom",
-            "/sys/bus/i2c/devices/i2c-0/0-0050/eeprom",
-            nullptr
+        uint32_t dlen = (uint32_t)(payload.size() + 2); // +2 for CRC
+        uint8_t hdr[8];
+        hdr[0] = atype & 0xFF;  hdr[1] = atype >> 8;
+        hdr[2] = acount & 0xFF; hdr[3] = acount >> 8;
+        hdr[4] = dlen & 0xFF;   hdr[5] = (dlen >> 8) & 0xFF;
+        hdr[6] = (dlen >> 16) & 0xFF; hdr[7] = dlen >> 24;
+
+        // CRC over header + payload
+        uint16_t crc = 0;
+        uint16_t poly = 0xA001;
+        auto crc_byte = [&](uint8_t b) {
+            crc ^= b;
+            for (int i = 0; i < 8; i++)
+                crc = (crc & 1) ? (crc >> 1) ^ poly : crc >> 1;
         };
-        for (int i = 0; eeprom_paths[i]; i++) {
-            std::ifstream f(eeprom_paths[i], std::ios::binary);
-            if (f.is_open()) {
-                raw_image.assign(std::istreambuf_iterator<char>(f),
-                                 std::istreambuf_iterator<char>());
-                if (!raw_image.empty())
-                    break;
+        for (auto b : hdr)        crc_byte(b);
+        for (auto b : payload)    crc_byte(b);
+
+        out.insert(out.end(), hdr, hdr + 8);
+        out.insert(out.end(), payload.begin(), payload.end());
+        out.push_back(crc & 0xFF);
+        out.push_back(crc >> 8);
+    };
+
+    // ── Reconstruct vendor atom payload from DT fields ────────────────────
+    // UUID: DT gives "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" ASCII string.
+    // We parse it back to 16 raw bytes.
+    std::vector<uint8_t> uuid_raw;
+    {
+        std::string s = info.uuid; // already parsed above
+        // Remove dashes and decode hex pairs
+        std::string hex;
+        for (char c : s) if (c != '-') hex += c;
+        if (hex.size() == 32) {
+            for (size_t i = 0; i < 16; i++) {
+                uuid_raw.push_back((uint8_t)std::stoul(hex.substr(i*2,2), nullptr, 16));
             }
         }
     }
-
-    if (raw_image.size() < 12 || le32(raw_image.data()) != HATPLUS_MAGIC) {
-        // sysfs eeprom path not accessible — try enabling it with:
-        //   echo "24c256 0x50" | sudo tee /sys/bus/i2c/devices/i2c-0/new_device
-        // or add to /etc/modules:  at24
+    if (uuid_raw.size() != 16) {
         info.auth = AuthResult::PARSE_ERROR;
         return info;
     }
 
-    // Find the RSIG atom in the raw image to get its exact byte offset
-    size_t sig_atom_offset = SIZE_MAX;
-    iter_atoms(raw_image, [&](const Atom &a) -> bool {
-        if (a.type == ATOM_TYPE_CUSTOM && a.payload_len >= 8
-            && memcmp(a.payload, RSIG_MAGIC, 4) == 0) {
-            sig_atom_offset = a.atom_offset;
-            return false; // stop
-        }
-        return true;
-    });
+    // Encode vendor and product strings with NUL terminator
+    std::string vstr = info.vendor_str + ' ';
+    std::string pstr = info.product_str + ' ';
+    uint8_t vslen = (uint8_t)vstr.size();
+    uint8_t pslen = (uint8_t)pstr.size();
 
-    if (sig_atom_offset == SIZE_MAX) {
-        info.auth = AuthResult::NO_SIGNATURE;
+    std::vector<uint8_t> vendor_payload;
+    vendor_payload.insert(vendor_payload.end(), uuid_raw.begin(), uuid_raw.end());
+    // product_id and product_ver: little-endian uint16
+    vendor_payload.push_back(info.product_id & 0xFF);
+    vendor_payload.push_back(info.product_id >> 8);
+    vendor_payload.push_back(info.product_ver & 0xFF);
+    vendor_payload.push_back(info.product_ver >> 8);
+    vendor_payload.push_back(vslen);
+    vendor_payload.push_back(pslen);
+    vendor_payload.insert(vendor_payload.end(), vstr.begin(), vstr.end());
+    vendor_payload.insert(vendor_payload.end(), pstr.begin(), pstr.end());
+
+    // ── Fixed atoms (product-specific, not exposed by DT) ─────────────────
+    // Atom 0x0003: Linux DT overlay blob name — fixed for µCell
+    std::vector<uint8_t> dt_blob_payload = {
+        0x6d,0x75,0x2d,0x63,0x65,0x6c,0x6c,0x2d,0x62,0x62,0x5f,
+        0x72,0x61,0x73,0x70,0x62,0x65,0x72,0x72,0x79,0x70,0x69
+        // "mu-cell-bb_raspberrypi"
+    };
+    // Atom 0x0006: GPIO map — fixed for µCell
+    std::vector<uint8_t> gpio_map_payload = { 0x88, 0x13, 0x00, 0x00 };
+
+    // ── SNUM atom payload from DT custom_0 ────────────────────────────────
+    std::vector<uint8_t> snum_payload;
+    dt_read(base, "custom_0", snum_payload);
+    if (snum_payload.empty() || memcmp(snum_payload.data(), SNUM_MAGIC, 4) != 0) {
+        info.auth = AuthResult::PARSE_ERROR;
         return info;
     }
 
-    std::vector<uint8_t> signed_payload(raw_image.begin(),
-                                         raw_image.begin() + sig_atom_offset);
+    // ── Build the file header ─────────────────────────────────────────────
+    // numatoms = 5 (vendor + dt_blob + gpio_map + snum + rsig)
+    // eeplen   = we compute from the total reconstructed size
+    // We first build all atoms to know the total size, then patch the header.
+    std::vector<uint8_t> atoms_buf;
+    append_atom(atoms_buf, 0x0001, 0, vendor_payload);
+    append_atom(atoms_buf, 0x0003, 1, dt_blob_payload);
+    append_atom(atoms_buf, 0x0006, 2, gpio_map_payload);
+    append_atom(atoms_buf, 0x0004, 3, snum_payload);
+
+    // The RSIG atom (not included in signed payload) contributes to eeplen.
+    // sig_atom_size = 8 (header) + 4 (RSIG magic) + 4 (flags) + sig_len + 2 (CRC)
+    size_t sig_atom_size = 8 + 4 + 4 + signature_bytes.size() + 2;
+
+    uint16_t numatoms = 5;
+    uint32_t eeplen   = (uint32_t)(12 + atoms_buf.size() + sig_atom_size);
+
+    // File header
+    std::vector<uint8_t> signed_payload;
+    signed_payload.push_back(0x52); signed_payload.push_back(0x2d); // "R-Pi" magic
+    signed_payload.push_back(0x50); signed_payload.push_back(0x69);
+    signed_payload.push_back(0x02); // version
+    signed_payload.push_back(0x00); // reserved
+    signed_payload.push_back(numatoms & 0xFF);
+    signed_payload.push_back(numatoms >> 8);
+    signed_payload.push_back(eeplen & 0xFF);
+    signed_payload.push_back((eeplen >> 8) & 0xFF);
+    signed_payload.push_back((eeplen >> 16) & 0xFF);
+    signed_payload.push_back(eeplen >> 24);
+
+    signed_payload.insert(signed_payload.end(), atoms_buf.begin(), atoms_buf.end());
 
     // ── Try each compiled-in public key ──────────────────────────────────
     for (size_t i = 0; i < EMBEDDED_KEYS_COUNT; i++) {
