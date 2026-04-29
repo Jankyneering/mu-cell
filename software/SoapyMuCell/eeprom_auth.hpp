@@ -307,27 +307,26 @@ static EepromInfo read_and_verify_eeprom()
     }
 
     // ── Vendor info from individual DT files ──────────────────────────────
-    // uuid: 16 raw bytes in RFC 4122 big-endian order
+    // uuid: the firmware exposes this as a NUL-terminated ASCII string
+    // e.g. "89d952c4-95a4-4f2a-bb81-5cf066cfa9c2\0"
     {
-        std::vector<uint8_t> uuid_bytes;
-        if (dt_read(base, "uuid", uuid_bytes) && uuid_bytes.size() >= 16) {
+        std::string uuid_str = dt_read_string(base, "uuid");
+        if (!uuid_str.empty()) {
+            info.uuid = uuid_str;   // already formatted correctly
             info.has_vendor_info = true;
-            info.uuid = format_uuid(uuid_bytes.data());
         }
     }
     {
-        std::vector<uint8_t> buf;
-        // product_id and product_ver are 4-byte big-endian in the DT
-        // (the firmware stores them as 32-bit BE even though the spec uses 16-bit)
-        if (dt_read(base, "product_id", buf) && buf.size() >= 2) {
-            // Take last 2 bytes (covers both 2-byte and 4-byte representations)
-            size_t o = buf.size() - 2;
-            info.product_id = (uint16_t)(buf[o] << 8) | buf[o+1];
+        // product_id and product_ver: firmware exposes as ASCII hex strings
+        // e.g. "0x1255\0" or "0x0101\0"
+        std::string pid_str  = dt_read_string(base, "product_id");
+        std::string pver_str = dt_read_string(base, "product_ver");
+        if (!pid_str.empty()) {
+            info.product_id = (uint16_t)std::stoul(pid_str, nullptr, 0);
             info.has_vendor_info = true;
         }
-        if (dt_read(base, "product_ver", buf) && buf.size() >= 2) {
-            size_t o = buf.size() - 2;
-            info.product_ver = (uint16_t)(buf[o] << 8) | buf[o+1];
+        if (!pver_str.empty()) {
+            info.product_ver = (uint16_t)std::stoul(pver_str, nullptr, 0);
         }
     }
     info.vendor_str  = dt_read_string(base, "vendor");
@@ -385,16 +384,14 @@ static EepromInfo read_and_verify_eeprom()
     }
 
     // ── Reconstruct the signed payload from the raw EEPROM image ─────────
-    // The signing tool signs the full binary image up to (not including) the
-    // RSIG atom header. We need to read the raw EEPROM to get that exact
-    // byte sequence. Try the I2C EEPROM sysfs path first, then fall back to
-    // reading /sys/bus/i2c/../eeprom. The HAT EEPROM is always on i2c-0 at
-    // address 0x50 on Raspberry Pi.
+    // The signing tool signs all bytes up to (not including) the RSIG atom
+    // header.  The raw image is available via the kernel's i2c-dev sysfs
+    // eeprom interface.  Try several common paths.
     std::vector<uint8_t> raw_image;
     {
-        // Common sysfs paths for the HAT EEPROM on Raspberry Pi
         const char *eeprom_paths[] = {
             "/sys/bus/i2c/devices/0-0050/eeprom",
+            "/sys/bus/i2c/devices/1-0050/eeprom",
             "/sys/bus/i2c/devices/i2c-0/0-0050/eeprom",
             nullptr
         };
@@ -403,18 +400,21 @@ static EepromInfo read_and_verify_eeprom()
             if (f.is_open()) {
                 raw_image.assign(std::istreambuf_iterator<char>(f),
                                  std::istreambuf_iterator<char>());
-                break;
+                if (!raw_image.empty())
+                    break;
             }
         }
     }
 
     if (raw_image.size() < 12 || le32(raw_image.data()) != HATPLUS_MAGIC) {
-        // Raw image unavailable or invalid — cannot verify signature
+        // sysfs eeprom path not accessible — try enabling it with:
+        //   echo "24c256 0x50" | sudo tee /sys/bus/i2c/devices/i2c-0/new_device
+        // or add to /etc/modules:  at24
         info.auth = AuthResult::PARSE_ERROR;
         return info;
     }
 
-    // Find the RSIG atom in the raw image to get its offset
+    // Find the RSIG atom in the raw image to get its exact byte offset
     size_t sig_atom_offset = SIZE_MAX;
     iter_atoms(raw_image, [&](const Atom &a) -> bool {
         if (a.type == ATOM_TYPE_CUSTOM && a.payload_len >= 8

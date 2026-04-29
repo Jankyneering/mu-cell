@@ -18,6 +18,7 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/gpio.h>
+#include <memory>
 #include <linux/spi/spidev.h>
 
 #include <alsa/asoundlib.h>
@@ -773,6 +774,10 @@ public:
 
         // Make sure PA is turned off
         writeSetting("PA", "OFF");
+
+        // Turn off RX and TX LEDs / RF switches
+        gpio_rx.set_value(0);
+        gpio_tx.set_value(0);
     }
 
 /***********************************************************************
@@ -1728,3 +1733,41 @@ static SoapySDR::Device *makeDevice(const SoapySDR::Kwargs &args)
  * Registration
  **********************************************************************/
 static SoapySDR::Registry registerDevice("mucell", &findDevice, &makeDevice, SOAPY_SDR_ABI_VERSION);
+
+// Also register under the "sx" driver key so that software built against
+// SoapySX (e.g. tetra-bluestation) works without modification.
+// We only do this when SoapySX is NOT already loaded — if it is, its own
+// registry entry takes precedence and we must not conflict with it.
+// Detection: SoapySX registers itself as "sx"; if that key is already in
+// the registry we skip the alias.  We use a constructor-priority object
+// so the check runs after all static registries are initialised.
+namespace {
+struct SxAliasRegistrar {
+    std::unique_ptr<SoapySDR::Registry> reg;
+    SxAliasRegistrar() {
+        // Try to enumerate devices with driver=sx.
+        // If any factory is registered for "sx" it means SoapySX is present.
+        bool sx_taken = false;
+        try {
+            SoapySDR::Kwargs probe;
+            probe["driver"] = "sx";
+            auto found = SoapySDR::Device::enumerate(probe);
+            sx_taken = !found.empty();
+        } catch (...) {}
+
+        if (!sx_taken) {
+            SoapySDR_logf(SOAPY_SDR_DEBUG,
+                "SoapySX not detected — registering SoapyMuCell under driver=sx alias");
+            reg = std::make_unique<SoapySDR::Registry>(
+                "sx", &findDevice, &makeDevice, SOAPY_SDR_ABI_VERSION);
+        } else {
+            SoapySDR_logf(SOAPY_SDR_DEBUG,
+                "SoapySX detected — skipping driver=sx alias to avoid conflict");
+        }
+    }
+};
+// Constructed after all static registries due to translation-unit ordering;
+// this is sufficient for the same .so.  If SoapySX is in a separate .so it
+// will have been dlopen'd before this one by SoapySDR's module loader.
+static SxAliasRegistrar sx_alias;
+} // namespace
