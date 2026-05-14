@@ -22,8 +22,9 @@ sudo apt install -y --no-install-recommends \
 ## Build and install Device Tree overlay
 
 ```zsh
-git clone https://github.com/Jankyneering/mu-cell
-cd mu-cell/software/raspberry-pi-drivers/mu-cell-bb-dts
+git clone https://github.com/Jankyneering/mu-cell mu-cell
+git submodule update --init --recursive
+cd mu-cell/software/submodules/mu-cell-bb-drivers/raspberry-pi-drivers/mu-cell-bb-dts
 make
 make install
 sudo reboot
@@ -32,7 +33,7 @@ sudo reboot
 ## Build and install SoapyMuCell
 
 ```zsh
-cd mu-cell/software/SoapyMuCell
+cd mu-cell/software/submodules/mu-cell-bb-drivers/SoapyMuCell
 mkdir build
 cd build
 cmake ..
