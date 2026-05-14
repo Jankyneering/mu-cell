@@ -7,3 +7,6 @@
 [submodule "software/submodules/tetra-bluestation"]
 	path = software/submodules/tetra-bluestation
 	url = https://github.com/MidnightBlueLabs/tetra-bluestation.git
+[submodule "software/submodules/mu-cell-bb-drivers"]
+	path = software/submodules/mu-cell-bb-drivers
+	url = https://github.com/Jankyneering/mu-cell-bb-drivers.git
