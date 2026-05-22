@@ -10,3 +10,6 @@
 [submodule "software/submodules/mu-cell-bb-drivers"]
 	path = software/submodules/mu-cell-bb-drivers
 	url = https://github.com/Jankyneering/mu-cell-bb-drivers.git
+[submodule "software/submodules/mu-neuron"]
+	path = software/submodules/mu-neuron
+	url = https://github.com/Jankyneering/mu-neuron.git
