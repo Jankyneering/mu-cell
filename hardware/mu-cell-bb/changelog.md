@@ -1,5 +1,14 @@
 # µCell BB Changelog
 
+## v1.2 - Small updates
+
+- Footprint updates
+  - Changed Y1 footprint to the smaller 2016 package, as they tend to be more precise anyway (the larger 2520 package could fit both sizes, but reflow issues were observed during a mid-scale production run).
+- Component updates
+  - Set the RF Can to be excluded from BOM by default
+- Silkscreen updates
+  - Bumped version number to v1.2
+
 ## v1.1 - Minor refinements
 
 - Footprint updates
