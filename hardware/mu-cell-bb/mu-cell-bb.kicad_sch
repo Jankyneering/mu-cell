@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "µCell - BB")
-		(date "2026-03-10")
-		(rev "v1.1")
+		(date "2026-05-24")
+		(rev "v1.2")
 		(company "jankyneering.cc")
 		(comment 1 "ON4PFD, ON6RF")
 	)
@@ -14326,7 +14326,7 @@
 				)
 			)
 		)
-		(property "Footprint" "parts:Oscillator_SMD_ECS_2520MV-xxx-xx-4Pin_2.5x2.0mm"
+		(property "Footprint" "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm"
 			(at 52.07 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -14337,7 +14337,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.ecsxtal.com/store/pdf/ECS-2520MV.pdf"
+		(property "Datasheet" "https://jlc-prod-smt.oss-eu-central-1.aliyuncs.com/smtDataManualFile/8589791319397724160-C1987359.pdf?response-content-disposition=attachment%3B%20filename%3DC1987359.pdf%3B%20filename%2A%3DUTF-8%27%27C1987359.pdf&x-oss-date=20260524T184223Z&x-oss-expires=1800&x-oss-security-token=CAISgAN1q6Ft5B2yfSjIr5veHPbQm6dv%2BaeRYGLhjTRiPdxBubHdlTz2IHhMdHJsAOodtv0%2FmmhT6PkclqRLcbhpcmfjV%2BZHzLB8qdRnhz9M4J7b16cNrbH4M4H6aXeirtuwDsz9SNTCALjPD3nPii50x5bjaDymRCbLGJaViJlhHLN1Ow6jdmhpCctxLAlvo9NgFxm3D%2Fu2NQPwiWf9FVdhvhEG6Vly8qOi2MaRmFy8yFTx0b0SvJ%2BjYMrmPctoN9JnSdC5mfdzau3a1TJ84gRD0a5wkaVA1zbDs5bfISEIuUzebreLqY03dV4mOvdqIcMe8qigz88fk%2FfIioH6xyxKOexoSCnFTOiiupCcQLPyao9jLu6iayqViY7QaIOTqQohZmkAMwVOasAsI3Ngh4zF97Qt0cVNkXO9gWfLI8DtuMleWiriQvdNMnSgc5lCkRRYwGs1287ugXlSQzo890KPDAEovaKCnZ2ZSfh7Y4sNknI6i%2Bfc2Se2MIkIrv12yqKWD5sagAE79bwWWUez5c%2FB4w2criuVba2OLz%2B02RFmm7CNYMmXf9fIxUIj1Twk5Pv7K8P8RkNlBHnj2loAVKu%2FB9is9vQ%2F3a%2BJscBcD20YJYXv%2FESbiukC8mBBsJqIAWMVF0nbhi%2FBqBihkwEhRlF6yWAlh3xdp%2B4uenRhDtFeiIWXE%2FxsoyAA&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=STS.NXkWLdvxNNezbDPi471SmVtvw%2F20260524%2Feu-central-1%2Foss%2Faliyun_v4_request&x-oss-signature=063c7ceb01ce589fe3dfd7678514f4a9f9039a99d840c6cbbb7f39b023bcb9fd"
 			(at 36.195 71.755 0)
 			(hide yes)
 			(show_name no)
@@ -14348,7 +14348,7 @@
 				)
 			)
 		)
-		(property "Description" "HCMOS Crystal Clock Oscillator, 2.5x2.0 mm SMD"
+		(property "Description" "HCMOS Crystal Clock Oscillator, 2.0x1.6 mm SMD"
 			(at 40.64 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -21541,9 +21541,9 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c32baac0-5218-4e84-bad6-9f210dd5c5c3")

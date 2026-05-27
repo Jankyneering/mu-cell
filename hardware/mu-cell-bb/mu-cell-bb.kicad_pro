@@ -50,7 +50,23 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.2
+          "border_display_style": 2,
+          "border_hatch_pitch": 0.5,
+          "corner_radius": 0.0,
+          "corner_smoothing": 0,
+          "fill_mode": 0,
+          "hatch_gap": 1.5,
+          "hatch_orientation": 0.0,
+          "hatch_smoothing_level": 0,
+          "hatch_smoothing_value": 0.1,
+          "hatch_thickness": 1.0,
+          "min_clearance": 0.2,
+          "min_island_area": 10.0,
+          "min_thickness": 0.25,
+          "pad_connection": 1,
+          "remove_islands": 0,
+          "thermal_relief_gap": 0.5,
+          "thermal_relief_spoke_width": 0.5
         }
       },
       "diff_pair_dimensions": [
@@ -60,7 +76,16 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "courtyards_overlap|124542059|107912213|73391e02-e949-47aa-bf82-1482f6cbd4b7|7ee96058-9576-40c6-99ac-c9c5c949b078",
+          ""
+        ],
+        [
+          "courtyards_overlap|126821000|89754873|73391e02-e949-47aa-bf82-1482f6cbd4b7|92a179ab-5489-4913-aa46-07232d41797d",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -259,7 +284,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": "v1.1"
+      "sch_revision": "v1.2"
     },
     "layer_pairs": [],
     "layer_presets": [],
