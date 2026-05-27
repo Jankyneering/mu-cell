@@ -1,0 +1,219 @@
+name: Bug report
+description: Report a bug to help improve µCell
+title: "[BUG] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 Bug Report
+
+        Thank you for reporting a bug.
+        Please fill out **all required fields** so we can reproduce and fix the issue efficiently.
+
+  # -------------------------------------------------
+  # Bug description
+  # -------------------------------------------------
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Bug description
+      description: Clear and concise description of what the bug is.
+      placeholder: What happened?
+    validations:
+      required: true
+
+  # -------------------------------------------------
+  # Environment
+  # -------------------------------------------------
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+
+  - type: dropdown
+    id: hardware_platform
+    attributes:
+      label: Hardware platform
+      options:
+        - Raspberry Pi 3B/3B+
+        - Raspberry Pi 4
+        - Raspberry Pi 5
+        - Raspberry Pi Zero 2 (W)
+        - Raspberry Pi CM4
+        - Raspberry Pi CM5
+    validations:
+      required: true
+
+  - type: input
+    id: os_version
+    attributes:
+      label: OS version
+      placeholder: e.g. Raspberry Pi OS Lite (Bullseye), Debian 13, ...
+    validations:
+      required: false
+
+  # -------------------------------------------------
+  # Hardware
+  # -------------------------------------------------
+  - type: markdown
+    attributes:
+      value: |
+        ## Hardware
+
+  - type: dropdown
+    id: sdr_model
+    attributes:
+      label: SDR model
+      options:
+        - LimeSDR
+        - USRP
+        - SXCeiver
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: radio_model
+    attributes:
+      label: Radio model
+      placeholder: e.g. Motorola MXP600, custom board, N/A
+    validations:
+      required: false
+
+  - type: textarea
+    id: host_hardware
+    attributes:
+      label: Host hardware
+      description: Machine running `tetra-bluestation`
+      placeholder: |
+        - CPU:
+        - RAM:
+        - Architecture (x86_64 / ARM):
+    validations:
+      required: true
+
+  # -------------------------------------------------
+  # Software / build info
+  # -------------------------------------------------
+  - type: markdown
+    attributes:
+      value: |
+        ## Software / Build information
+
+  - type: dropdown
+    id: git_branch
+    attributes:
+      label: Git branch
+      description: Select the branch you used.
+      options:
+        - main
+        - dev
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: git_branch_other
+    attributes:
+      label: Branch name (if "Other")
+      description: |
+        Fill this **only if you selected "Other" above**.
+      placeholder: e.g. fix/bs-ul-mac
+    validations:
+      required: false
+
+  - type: input
+    id: commit_hash
+    attributes:
+      label: Commit hash
+      placeholder: e.g. a1b2c3d (optional but recommended)
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps to reproduce the bug.
+      placeholder: |
+        1. Build from <branch>
+        2. Launch with your `config.toml` file
+        3. Perform operation that creates bug
+        4. Observe error
+    validations:
+      required: true
+
+  # -------------------------------------------------
+  # Expected vs actual behavior
+  # -------------------------------------------------
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+      placeholder: Describe the expected behavior.
+    validations:
+      required: false
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Actual behavior
+      description: What actually happened?
+      placeholder: Describe what actually occurred.
+    validations:
+      required: true
+
+  # -------------------------------------------------
+  # Logs / output
+  # -------------------------------------------------
+  - type: markdown
+    attributes:
+      value: |
+        ## Logs and outputs
+
+  - type: textarea
+    id: command_output
+    attributes:
+      label: Command output
+      description: |
+        Paste the **exact console output** when the bug happens.
+        Please avoid screenshots for logs.
+      render: shell
+      placeholder: |
+        $ .tetra-bluestation config.toml
+        <full output here>
+    validations:
+      required: true
+    
+  - type: textarea
+    id: soapy_probe
+    attributes:
+      label: SoapySDR probe output
+      description: |
+        Paste the **exact console output** when running `SoapySDRUtil --probe`.
+        Please avoid screenshots for logs.
+      render: shell
+      placeholder: |
+        $ SoapySDRUtil --probe
+        <full output here>
+    validations:
+      required: true
+
+  # -------------------------------------------------
+  # Additional context
+  # -------------------------------------------------
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues to avoid duplicates
+          required: true
+        - label: I am using a supported SDR device
+          required: false
+        - label: I can reproduce this issue reliably
+          required: false
