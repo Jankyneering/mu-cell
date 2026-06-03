@@ -1,35 +1,78 @@
 <h1 align="center">µCell</h1>
 
 <p align="center">
-	<img width="200" height="200" margin-right="100%" src="/docs/logos/mu-cell_logo.svg" alt="µCell logo">
+	<img width="200" height="200" src="/docs/logos/mu-cell_logo.svg" alt="µCell logo">
 </p>
 
-<p align="center">An open-source SDR base station.</p>
+<p align="center">An open-source SDR base station platform for TETRA and other digital radio modes.</p>
+
+---
 
 ## Contents
 
-- [Contents](#contents)
+- [Getting Started](#getting-started)
 - [Hardware](#hardware)
 - [Software](#software)
 - [How to Contribute](#how-to-contribute)
 - [Acknowledgements & License](#acknowledgements--license)
 
+---
+
+## Getting Started
+
+These steps get a µCell base station running on a Raspberry Pi.
+
+### What you need
+
+- A Raspberry Pi 3, 4, 5, or Zero 2W
+- A µCell BB board connected to the Pi
+- A microSD card with **Raspberry Pi OS Lite (64-bit)**
+
+### 1. Flash and boot
+
+Flash Raspberry Pi OS Lite (64-bit) to your microSD card using the [Raspberry Pi Imager](https://www.raspberrypi.com/software/). Enable SSH in the imager settings before writing, then boot the Pi and connect via SSH.
+
+### 2. Run the install script
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jankyneering/mu-cell/main/install-mu-cell-sw.sh)"
+```
+
+The script will:
+- Install all required system dependencies
+- Clone and build the µCell baseband drivers
+- Ask which software stack to install: **bluestation** (stable TETRA), **flowstation** (more features, less stable), or **MMDVM-IQ** (multi-mode digital radio)
+- Download the correct binary for your Pi model and place it in your home directory
+
+> A reboot is required after the first install to load the DTS overlay. The script will prompt you. Run it again after rebooting to verify the driver.
+
+### 3. Configure the base station
+
+Use the configuration tool at **https://bluestation.russel053.com/** to generate a `config.toml` for your base station. Copy it to your Pi's home directory.
+
+### 4. Start the base station
+
+```bash
+./bluestation-bs ./config.toml
+```
+
+---
+
 ## Hardware
 
-The `Hardware` directory contains the open hardware designs for the µCell ecosystem. Each board is developed as a modular building block so systems can range from a minimal hotspot to a more complete base station.
+The `hardware` directory contains the open hardware designs for the µCell ecosystem. Each board is a modular building block, so systems can range from a minimal hotspot to a more complete base station.
 
-The platform is built around an SDR-based architecture. While it is primarily designed for TETRA experimentation and infrastructure using the Bluestation stack, the hardware can also support other digital radio modes depending on the software used.
+The platform uses an SDR-based architecture built primarily around the SX1255 transceiver. The µCell driver is supported by Bluestation, Flowstation, and MMDVM-IQ, covering TETRA infrastructure as well as other analog and digital radio modes such as DMR, D-Star, YSF, and P25.
 
-Design files typically include schematics, PCB layouts, fabrication outputs, and documentation required for assembly and integration.
+Design files include schematics, PCB layouts, fabrication outputs, and documentation required for assembly and integration.
 
 ### Design goals
 
-- Modular architecture allowing systems to scale from small hotspot deployments to higher power base stations  
-- SDR-based design enabling experimentation with multiple digital radio modes  
-- Compatibility with the TETRA-bluestation software stack  
-- Potential support for other systems such as MMDVM-SDR or similar SDR-based radio frameworks  
-- Use of readily available components where possible  
-- Reproducible designs suitable for small-scale manufacturing  
+- Modular architecture that scales from small hotspot deployments to higher power base stations
+- SDR-based design supporting multiple digital radio modes
+- Compatibility with Bluestation, Flowstation, and MMDVM-IQ software stacks
+- Use of readily available components where possible
+- Reproducible designs suitable for small-scale manufacturing
 
 ### Boards
 
@@ -37,109 +80,96 @@ Design files typically include schematics, PCB layouts, fabrication outputs, and
 
 Baseband and RF transceiver board based on the SX1255.
 
-Features:
+- SX1255 transceiver with RF filtering and matching network
+- Stable reference clock
+- EEPROM for HAT identification
+- Operates standalone as a compact hotspot, or as the RF/baseband front-end when paired with a PA board
 
-- SX1255 transceiver  
-- RF filtering and matching network  
-- Stable reference clock  
-- EEPROM for HAT identification  
-- Designed to operate standalone as a compact hotspot  
-- Acts as the RF/baseband front-end when paired with external PA boards
+Measured specifications (v1.0):
 
-
-Measured specifications on v1.0: 
-
-- Tx Power (Pi/4 DQPSK): 3-5dBm
-- Rx Sensitivity (TETRA - T1): -117dBm
+| Parameter | Value |
+|---|---|
+| Tx Power (Pi/4 DQPSK) | 3–5 dBm |
+| Rx Sensitivity (TETRA T1) | -117 dBm |
 
 #### µCell PA Mini
 
 Low power RF front-end designed to extend the µCell BB.
 
-Features:
+- ~1 W RF power amplifier
+- Receive path conditioning with LNA
+- Preselector filtering
+- RF measurement and monitoring points
 
-- ~1 W RF power amplifier  
-- Receive path conditioning including LNA  
-- Preselector filtering  
-- RF measurement and monitoring points  
-- Intended for compact deployments where modest output power is sufficient
-
-#### µCell PA 10W (planned)
+#### µCell PA 10W *(planned)*
 
 Higher power RF front-end under investigation.
 
-Goals include:
+- ~10 W transmit output
+- Improved filtering and thermal design
+- Compatible with µCell BB control and RF interfaces
 
-- Approximately 10 W transmit output  
-- Improved filtering and thermal design  
-- Compatibility with µCell BB control and RF interfaces  
-
-#### µCell Display (planned)
+#### µCell Display *(planned)*
 
 Optional front panel module for integrated deployments.
 
-Intended features:
+- Local system status display
+- Control interface
+- Integration with the BlueStation/µCell software stack
 
-- Local system status display  
-- Control interface  
-- Integration with the BlueStation/µCell software stack for monitoring and configuration  
+---
 
 ## Software
 
-The `Software` directory contains the software components required to operate µCell hardware.
-
-This folder primarily aggregates upstream projects as git submodules, along with additional companion utilities specific to the µCell platform.
-
-Because µCell is built around an SDR architecture, multiple software stacks may be used depending on the desired radio mode.
+The `software` directory contains the components required to operate µCell hardware. It primarily aggregates upstream projects as git submodules, along with companion utilities specific to the µCell platform.
 
 ### Components
 
+#### [µCell BB Drivers](https://github.com/Jankyneering/mu-cell-bb-drivers)
+
+SoapySDR driver for the µCell baseband board. Provides the hardware abstraction layer used by Bluestation and other SDR software. Includes the DTS overlay for Raspberry Pi and the SoapyMuCell plugin.
+
 #### [Tetra-Bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation)
 
-Main TETRA base station software responsible for implementing the TETRA protocol stack and base station behavior.
+TETRA base station software implementing the TETRA protocol stack and base station behavior.
 
-#### [SoapySX](https://github.com/tejeez/sxxcvr/tree/main/SoapySX)
+#### [Flowstation](https://github.com/razvanzeces/flowstation)
 
-SoapySDR driver used to interface the SX1255 transceiver with Bluestation and other SDR software.
+Alternative TETRA base station software with more features. Less stable than Bluestation but implements many more features.
 
-This provides the SDR abstraction layer used by the base station software.
+#### [MMDVM-IQ](https://github.com/g4klx/MMDVM-IQ)
+
+Multi-mode digital voice modem software supporting FM, DMR, D-Star, YSF, P25, and other modes. Uses the µCell driver via SoapySDR as its radio back-end.
 
 #### µCell utilities
 
-Supporting software components for platform integration, which may include:
+Supporting software for platform integration, including display and OLED drivers, system monitoring, hardware control helpers, and deployment scripts.
 
-- Display/OLED drivers  
-- System monitoring  
-- Hardware control helpers  
-- Deployment or configuration scripts  
+---
 
-These utilities are intended to simplify operating µCell hardware as an integrated system.
+## How to Contribute
 
-## How to contribute
+Contributions are welcome. For small fixes or documentation updates, feel free to open a pull request directly. For larger changes, open an issue first so the approach can be discussed. Keep pull requests focused and include a clear description of what changed and why.
 
-Contributions to µCell are welcome. If you have improvements, fixes, documentation updates, or new ideas for either the hardware or software, feel free to open an issue to discuss it or submit a pull request directly. For larger changes, opening an issue first is recommended so the approach can be discussed.  
-Please keep pull requests focused and include clear descriptions of the changes and any relevant documentation updates.
+---
 
 ## Acknowledgements & License
 
-µCell builds on the work of several open-source projects and contributors in the SDR and TETRA experimentation communities :
+µCell builds on the work of several open-source projects:
 
-- Tatu Peltola ([tejeez](https://github.com/tejeez/))  
-Designer of the [SXCeiver](https://github.com/tejeez/sxxcvr) hardware, which provided early inspiration for compact SX1255-based SDR radio hardware, and amazing insights for component selection and design.
-
-- Wouter Bokslag ([Midnight Blue](https://github.com/MidnightBlueLabs/)) and contributors  
-Author of the [TETRA-bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation-) project, which implements an open TETRA base station stack.
+- **Tatu Peltola ([tejeez](https://github.com/tejeez/))** — designer of the [SXCeiver](https://github.com/tejeez/sxxcvr), which provided early inspiration for compact SX1255-based SDR hardware.
+- **Wouter Bokslag ([Midnight Blue](https://github.com/MidnightBlueLabs/)) and contributors** — authors of [TETRA-bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation), which implements an open TETRA base station stack.
 
 We also acknowledge the broader SDR and SoapySDR communities whose work enables hardware experimentation with modern radio systems.
 
-Made with ❤️, lots of ☕️, and lack of 🛌  
+Made with ❤️, lots of ☕️, and lack of 🛌
 
-Hardware & Documentation published under CreativeCommons BY-SA 4.0
+Hardware & Documentation published under **CreativeCommons BY-SA 4.0**
 
-[![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)  
-[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+[![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
+[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/)
 
-Software published under GNU GPLv3
+Software published under **GNU GPLv3**
 
-[![License: GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
+[![License: GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)

@@ -209,6 +209,8 @@ variant=$variant
 EOF
 
     info "bluestation-bs installed to $BS_DEST ($remote_tag)"
+	echo "Don't forget to generate your config.toml with the settings of your cell!" >&2
+	echo "You can create it on https://bluestation.russel053.com/ , then import the config file" >&2
 }
 
 # ─── 8. Ask which variant to install ──────────────────────────────────────────
@@ -245,6 +247,7 @@ main() {
         read -r -p "Reboot now? [y/N] " REPLY
         if [[ "${REPLY,,}" == "y" ]]; then
             sudo reboot
+			exit 0
         else
             info "Skipping reboot. Re-run this script after rebooting to verify the driver."
             exit 0
