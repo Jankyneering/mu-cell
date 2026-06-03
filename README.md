@@ -20,7 +20,7 @@
 
 ## Getting Started
 
-These steps get a µCell base station running on a Raspberry Pi.
+These steps get a µCell running a TETRA base station on a Raspberry Pi.
 
 ### What you need
 
@@ -41,7 +41,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jankyneering/mu-cell/mai
 The script will:
 - Install all required system dependencies
 - Clone and build the µCell baseband drivers
-- Ask which software stack to install: **bluestation** (stable TETRA), **flowstation** (more features, less stable), or **MMDVM-IQ** (multi-mode digital radio)
+- Ask which software stack to install: **bluestation** (stable TETRA), **flowstation** (more features, less stable). **MMDVM-IQ** (multi-mode digital radio) will come soon.
 - Download the correct binary for your Pi model and place it in your home directory
 
 > A reboot is required after the first install to load the DTS overlay. The script will prompt you. Run it again after rebooting to verify the driver.
