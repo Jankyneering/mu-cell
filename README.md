@@ -85,6 +85,10 @@ Baseband and RF transceiver board based on the SX1255.
 - EEPROM for HAT identification
 - Operates standalone as a compact hotspot, or as the RF/baseband front-end when paired with a PA board
 
+<p align="center">
+  <img src="./docs/mucell-pic.jpg" width="600" alt="µCell BB board">
+</p>
+
 Measured specifications (v1.0):
 
 | Parameter | Value |
