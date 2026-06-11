@@ -59,7 +59,8 @@ clone_or_update_repo() {
     fi
 
     info "Repository already exists. Checking for updates..."
-    cd "$INSTALL_DIR"    git fetch origin
+    cd "$INSTALL_DIR"    
+	git fetch origin
 
     LOCAL=$(git rev-parse HEAD)
     REMOTE=$(git rev-parse "origin/main")
