@@ -284,7 +284,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": "v1.2"
+      "sch_revision": "v1.3"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -731,7 +731,7 @@
           "group_by": false,
           "label": "MPN",
           "name": "MPN",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -838,7 +838,7 @@
         "uuid": "564c8f3e-4a0a-4bb3-921f-1318a09780f9"
       }
     ],
-    "used_designators": "",
+    "used_designators": "#PWR152",
     "variants": []
   },
   "sheets": [

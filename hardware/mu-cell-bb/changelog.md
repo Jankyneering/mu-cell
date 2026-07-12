@@ -1,6 +1,20 @@
 # µCell BB Changelog
 
+## v1.3 - Batch feedback upgrades
+
+> 2026/07
+
+- Routing updates
+  - Moved some vias that were in the middle of component pads to avoid soldering issues during production.
+- Net updates
+  - Changes 3.3V on accessory header to use the 3.3V rail from the Raspberry Pi instead of the µCell BB's 3.3V rail, to avoid overloading or adding noise to the µCell BB's 3.3V regulator when using high-current accessories.
+- Silkscreen updates
+  - Bumped version number to v1.3
+  - Bumped date to 2026/07
+
 ## v1.2 - Small updates
+
+> 2026/05
 
 - Footprint updates
   - Changed Y1 footprint to the smaller 2016 package, as they tend to be more precise anyway (the larger 2520 package could fit both sizes, but reflow issues were observed during a mid-scale production run).
@@ -10,6 +24,8 @@
   - Bumped version number to v1.2
 
 ## v1.1 - Minor refinements
+
+> 2026/04
 
 - Footprint updates
   - Reworked RF Can GND pad vias
@@ -25,5 +41,7 @@
   - Added "Serial n°" Field to bottom side
 
 ## v1.0 - Initial release
+
+> 2026/04
 
 - Performance on par with [SXCeiver](https://sxceiver.com)
