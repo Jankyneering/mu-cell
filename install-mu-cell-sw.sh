@@ -1,27 +1,107 @@
 #!/usr/bin/env bash
-# install_mucell.sh
-# Installs or updates the mu-cell SDR driver suite, then installs bluestation-bs.
+# install-mu-cell-sw.sh
+#
+# Installs or updates the µCell driver suite: the device tree overlay and the
+# SoapyMuCell SoapySDR driver, then probes the board.
+#
+# Radio software (Tetra-Bluestation, Flowstation, MMDVM-IQ, ...) is not
+# installed here. Each is its own project, see docs/quickStartGuide.md.
+#
 # Safe to re-run after a reboot or on an existing install.
+#
+# Usage: install-mu-cell-sw.sh [--force] [--no-reboot] [--help]
 
 set -euo pipefail
 
-REPO_URL="https://github.com/Jankyneering/mu-cell-bb-drivers"
-INSTALL_DIR="$HOME/mu-cell-bb-drivers"
+REPO_URL="${MUCELL_REPO_URL:-https://github.com/Jankyneering/mu-cell-bb-drivers}"
+INSTALL_DIR="${MUCELL_INSTALL_DIR:-$HOME/mu-cell-bb-drivers}"
+OVERLAY_NAME="mu-cell-bb_raspberrypi"
+DOCS_URL="https://github.com/Jankyneering/mu-cell/blob/main/docs/quickStartGuide.md"
 
-BS_API_BLUESTATION="https://api.github.com/repos/MidnightBlueLabs/tetra-bluestation/releases/latest"
-BS_API_FLOWSTATION="https://api.github.com/repos/razvanzeces/flowstation/releases/latest"
-BS_DEST="$HOME/bluestation-bs"
-BS_VERSION_FILE="$HOME/.bluestation_version"
+FORCE_BUILD=false
+ALLOW_REBOOT=true
 
 # ─── Color helpers ────────────────────────────────────────────────────────────
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
+if [ -t 1 ]; then
+    RED=$'\033[0;31m'
+    GREEN=$'\033[0;32m'
+    YELLOW=$'\033[1;33m'
+    NC=$'\033[0m'
+else
+    RED=''; GREEN=''; YELLOW=''; NC=''
+fi
 
-info()  { echo -e "${GREEN}[INFO]${NC}  $*"; }
-warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
-error() { echo -e "${RED}[ERROR]${NC} $*" >&2; }
+info()  { printf '%s[INFO]%s  %s\n' "$GREEN" "$NC" "$*"; }
+warn()  { printf '%s[WARN]%s  %s\n' "$YELLOW" "$NC" "$*"; }
+error() { printf '%s[ERROR]%s %s\n' "$RED" "$NC" "$*" >&2; }
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") [options]
+
+Installs or updates the µCell device tree overlay and the SoapyMuCell driver.
+
+Options:
+  --force       Rebuild and reinstall even if the repository is up to date
+  --no-reboot   Never offer to reboot, just print the reminder
+  --help        Show this message
+
+Environment:
+  MUCELL_REPO_URL      Driver repository URL
+  MUCELL_INSTALL_DIR   Clone location (default: \$HOME/mu-cell-bb-drivers)
+EOF
+}
+
+# ─── 0. Argument parsing and environment checks ───────────────────────────────
+parse_args() {
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            --force)     FORCE_BUILD=true ;;
+            --no-reboot) ALLOW_REBOOT=false ;;
+            --help|-h)   usage; exit 0 ;;
+            *)           error "Unknown option: $1"; usage >&2; exit 1 ;;
+        esac
+        shift
+    done
+}
+
+check_environment() {
+    if [ -z "${BASH_VERSION:-}" ]; then
+        error "This script must be run with bash."
+        exit 1
+    fi
+
+    if ! command -v apt-get >/dev/null 2>&1; then
+        error "apt-get not found. This script targets Raspberry Pi OS or another Debian derivative."
+        error "See $DOCS_URL for the manual build procedure."
+        exit 1
+    fi
+
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO=""
+    elif command -v sudo >/dev/null 2>&1; then
+        SUDO="sudo"
+    else
+        error "sudo not found and not running as root."
+        exit 1
+    fi
+}
+
+# Ask a yes/no question on the controlling terminal. Returns 1 when there is no
+# terminal, so the script stays usable when piped into bash.
+prompt_yes_no() {
+    local prompt="$1" reply=""
+
+    # /dev/tty can exist and still fail to open when there is no controlling
+    # terminal, so probe it in a subshell rather than testing with [ -r ].
+    ( exec 3</dev/tty ) 2>/dev/null || return 1
+    read -r -p "$prompt" reply </dev/tty || return 1
+
+    case "$reply" in
+        [yY]|[yY][eE][sS]) return 0 ;;
+        *)                 return 1 ;;
+    esac
+}
 
 # ─── 1. System dependencies ───────────────────────────────────────────────────
 install_deps() {
@@ -31,6 +111,7 @@ install_deps() {
         git make g++ cmake
         libsoapysdr-dev soapysdr-tools libasound2-dev python3-soapysdr
         libssl-dev clang llvm-dev libclang-dev
+        device-tree-compiler
     )
 
     MISSING=()
@@ -44,8 +125,8 @@ install_deps() {
         info "All system packages are already installed."
     else
         info "Installing missing packages: ${MISSING[*]}"
-        sudo apt update
-        sudo apt install -y --no-install-recommends "${MISSING[@]}"
+        $SUDO apt-get update
+        DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y --no-install-recommends "${MISSING[@]}"
     fi
 }
 
@@ -54,185 +135,143 @@ install_deps() {
 clone_or_update_repo() {
     if [ ! -d "$INSTALL_DIR/.git" ]; then
         info "Cloning mu-cell-bb-drivers to $INSTALL_DIR..."
-        git clone "$REPO_URL" "$INSTALL_DIR"
+        git clone --recurse-submodules "$REPO_URL" "$INSTALL_DIR"
         return 0
     fi
 
     info "Repository already exists. Checking for updates..."
-    cd "$INSTALL_DIR"    
-	git fetch origin
+    cd "$INSTALL_DIR"
 
-    LOCAL=$(git rev-parse HEAD)
-    REMOTE=$(git rev-parse "origin/main")
-
-    if [ "$LOCAL" = "$REMOTE" ]; then
-        info "Repository is up to date ($(git rev-parse --short HEAD))."
-        return 1
-    else
-        warn "Updates found. Pulling latest changes..."
-        git pull --ff-only
-        return 0
+    if ! git fetch origin; then
+        error "Could not reach $REPO_URL. Check your network connection."
+        exit 1
     fi
+
+    # Work out the remote default branch instead of assuming "main".
+    local default_branch
+    git remote set-head origin --auto >/dev/null 2>&1 || true
+    default_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)
+    default_branch="${default_branch#origin/}"
+    [ -n "$default_branch" ] || default_branch="main"
+
+    local local_rev remote_rev current_branch
+    local_rev=$(git rev-parse HEAD)
+    remote_rev=$(git rev-parse "origin/$default_branch")
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+    if [ "$local_rev" = "$remote_rev" ]; then
+        info "Repository is up to date ($(git rev-parse --short HEAD))."
+        # Submodules can still be missing or stale after a partial clone.
+        git submodule update --init --recursive
+        return 1
+    fi
+
+    if [ "$current_branch" != "$default_branch" ]; then
+        warn "Local checkout is on '$current_branch', not '$default_branch'. Leaving it alone."
+        warn "Update it yourself, or delete $INSTALL_DIR and re-run this script."
+        return 1
+    fi
+
+    warn "Updates found. Pulling latest changes..."
+    if ! git pull --ff-only; then
+        error "Fast-forward pull failed. You probably have local commits or changes."
+        error "Resolve them in $INSTALL_DIR, or delete the directory and re-run this script."
+        exit 1
+    fi
+    git submodule update --init --recursive
+    return 0
 }
 
 # ─── 3. Build and install the DTS overlay ─────────────────────────────────────
 build_dts() {
-    DTS_DIR="$INSTALL_DIR/raspberry-pi-drivers/mu-cell-bb-dts"
+    local dts_dir="$INSTALL_DIR/raspberry-pi-drivers/mu-cell-bb-dts"
 
-    if [ ! -d "$DTS_DIR" ]; then
-        error "DTS directory not found: $DTS_DIR"
+    if [ ! -d "$dts_dir" ]; then
+        error "DTS directory not found: $dts_dir"
         error "Check that submodules were initialised correctly."
         exit 1
     fi
 
     info "Building DTS overlay..."
-    cd "$DTS_DIR"
-    make overlay
-    sudo make install
+    ( cd "$dts_dir" && make overlay && $SUDO make install )
 }
 
 # ─── 4. Build and install SoapyMuCell ─────────────────────────────────────────
 build_soapy() {
-    SOAPY_DIR="$INSTALL_DIR/SoapyMuCell"
+    local soapy_dir="$INSTALL_DIR/SoapyMuCell"
 
-    if [ ! -d "$SOAPY_DIR" ]; then
-        error "SoapyMuCell directory not found: $SOAPY_DIR"
+    if [ ! -d "$soapy_dir" ]; then
+        error "SoapyMuCell directory not found: $soapy_dir"
         error "Check that submodules were initialised correctly."
         exit 1
     fi
 
     info "Building SoapyMuCell..."
-    cd "$SOAPY_DIR"
-    mkdir -p build
-    cd build
-    cmake ..
-    make
-    sudo make install
-    sudo ldconfig
+    (
+        cd "$soapy_dir"
+        mkdir -p build
+        cd build
+        cmake ..
+        make
+        $SUDO make install
+        $SUDO ldconfig
+    )
 }
 
-# ─── 5. Probe the driver ──────────────────────────────────────────────────────
+# ─── 5. Installation state checks ─────────────────────────────────────────────
+overlay_installed() {
+    [ -f "/boot/firmware/overlays/${OVERLAY_NAME}.dtbo" ] \
+        || [ -f "/boot/overlays/${OVERLAY_NAME}.dtbo" ]
+}
+
+driver_registered() {
+    command -v SoapySDRUtil >/dev/null 2>&1 || return 1
+    SoapySDRUtil --info 2>/dev/null | grep -qi "mucell"
+}
+
+hat_detected() {
+    [ -d /proc/device-tree/hat ]
+}
+
+# ─── 6. Probe the driver ──────────────────────────────────────────────────────
 probe_driver() {
     info "Probing mu-cell driver..."
 
-    if SoapySDRUtil --probe=driver=mucell 2>&1; then
+    if ! command -v SoapySDRUtil >/dev/null 2>&1; then
+        error "SoapySDRUtil not found. The soapysdr-tools package is missing."
+        return 1
+    fi
+
+    if SoapySDRUtil --probe=driver=mucell; then
         info "Driver probe succeeded."
+        return 0
+    fi
+
+    warn "Driver probe returned a non-zero exit code."
+    if ! hat_detected; then
+        warn "The Pi does not see a HAT EEPROM (/proc/device-tree/hat is missing)."
+        warn "Check that the board is seated on the GPIO header, and that you have"
+        warn "rebooted at least once since the overlay was installed."
     else
-        warn "Driver probe returned a non-zero exit code."
         warn "If this is right after install, a reboot may be required."
         warn "Re-run this script after rebooting to verify."
     fi
+    return 1
 }
 
-# ─── 6. Detect Pi model ───────────────────────────────────────────────────────
-detect_pi_model() {
-    # /proc/device-tree/model is the most reliable source on Pi OS
-    if [ -f /proc/device-tree/model ]; then
-        PI_MODEL=$(tr -d '\0' < /proc/device-tree/model)
-    else
-        PI_MODEL=""
-    fi
-
-    if echo "$PI_MODEL" | grep -qi "raspberry pi 5"; then
-        echo "rpi5"
-    else
-        # Pi 3, 4, Zero 2, etc. all use the rpi4 binary
-        echo "rpi4"
-    fi
-}
-
-# ─── 7. Install or update bluestation-bs ──────────────────────────────────────
-# $1 = "bluestation" or "flowstation"
-install_binary() {
-    local variant="$1"
-
-    if [ "$variant" = "flowstation" ]; then
-        local api_url="$BS_API_FLOWSTATION"
-        local keyword="bluestation-bs"   # flowstation uses same binary name
-    else
-        local api_url="$BS_API_BLUESTATION"
-        local pi_model
-        pi_model=$(detect_pi_model)
-        local keyword="bluestation-bs-$pi_model"
-        info "Detected platform: $pi_model"
-    fi
-
-    info "Fetching latest release info from GitHub..."
-    local release_json
-    release_json=$(curl -fsSL "$api_url")
-
-    local remote_tag
-    remote_tag=$(echo "$release_json" | grep '"tag_name"' | head -1 | cut -d'"' -f4)
-
-    if [ -z "$remote_tag" ]; then
-        error "Could not fetch release info from $api_url"
-        error "Check your network connection or GitHub API rate limits (60 req/hr unauthenticated)."
-        exit 1
-    fi
-
-    # Check stored version
-    local stored_tag=""
-    local stored_variant=""
-    if [ -f "$BS_VERSION_FILE" ]; then
-        stored_tag=$(grep "^tag=" "$BS_VERSION_FILE" | cut -d'=' -f2)
-        stored_variant=$(grep "^variant=" "$BS_VERSION_FILE" | cut -d'=' -f2)
-    fi
-
-    if [ "$remote_tag" = "$stored_tag" ] && [ "$variant" = "$stored_variant" ] && [ -f "$BS_DEST" ]; then
-        info "bluestation-bs is already up to date ($stored_tag, $stored_variant)."
-        return
-    fi
-
-    # Find the right asset URL
-    local asset_url
-    asset_url=$(echo "$release_json" \
-        | grep '"browser_download_url"' \
-        | grep "$keyword" \
-        | head -1 \
-        | cut -d'"' -f4)
-
-    if [ -z "$asset_url" ]; then
-        error "Could not find an asset matching '$keyword' in release $remote_tag."
-        error "Available assets:"
-        echo "$release_json" | grep '"browser_download_url"' | cut -d'"' -f4 >&2
-        exit 1
-    fi
-
-    info "Downloading $remote_tag ($variant) from:"
-    info "  $asset_url"
-    curl -fsSL -o "$BS_DEST" "$asset_url"
-    chmod +x "$BS_DEST"
-
-    # Save installed version
-    cat > "$BS_VERSION_FILE" <<EOF
-tag=$remote_tag
-variant=$variant
-EOF
-
-    info "bluestation-bs installed to $BS_DEST ($remote_tag)"
-	echo "Don't forget to generate your config.toml with the settings of your cell!" >&2
-	echo "You can create it on https://bluestation.russel053.com/ , then import the config file" >&2
-}
-
-# ─── 8. Ask which variant to install ──────────────────────────────────────────
-choose_variant() {
-    # Print menu to stderr so it isn't swallowed by $() command substitution
-    echo "" >&2
-    echo "Which software would you like to install?" >&2
-    echo "  1) bluestation (stable, fewer features) [default]" >&2
-    echo "  2) flowstation (less stable, more features)" >&2
-    echo "" >&2
-    read -r -p "Choice [1]: " CHOICE </dev/tty
-    CHOICE="${CHOICE:-1}"
-
-    case "$CHOICE" in
-        2) echo "flowstation" ;;
-        *) echo "bluestation" ;;
-    esac
+# ─── 7. Closing notes ─────────────────────────────────────────────────────────
+print_next_steps() {
+    echo ""
+    info "The board is now a standard SoapySDR device. Use the device string:"
+    info "  driver=mucell"
+    info "Radio software is installed separately from its own project."
+    info "See $DOCS_URL for Bluestation, Flowstation, MMDVM-IQ and general SDR software."
 }
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 main() {
+    parse_args "$@"
+    check_environment
     install_deps
 
     NEEDS_BUILD=false
@@ -240,25 +279,37 @@ main() {
         NEEDS_BUILD=true
     fi
 
-    if $NEEDS_BUILD; then
+    if [ "$FORCE_BUILD" = true ]; then
+        info "Rebuild forced."
+        NEEDS_BUILD=true
+    elif [ "$NEEDS_BUILD" = false ] && ! overlay_installed; then
+        warn "The device tree overlay is not installed. Building anyway."
+        NEEDS_BUILD=true
+    elif [ "$NEEDS_BUILD" = false ] && ! driver_registered; then
+        warn "SoapySDR does not list a mucell factory. Building anyway."
+        NEEDS_BUILD=true
+    fi
+
+    if [ "$NEEDS_BUILD" = true ]; then
         build_dts
         build_soapy
         info "Build complete."
-        warn "A reboot is recommended to load the new DTS overlay."
-        read -r -p "Reboot now? [y/N] " REPLY
-        if [[ "${REPLY,,}" == "y" ]]; then
-            sudo reboot
-			exit 0
-        else
-            info "Skipping reboot. Re-run this script after rebooting to verify the driver."
+        warn "A reboot is required to load the device tree overlay."
+
+        if [ "$ALLOW_REBOOT" = true ] && prompt_yes_no "Reboot now? [y/N] "; then
+            info "Rebooting. Re-run this script afterwards to verify the driver."
+            $SUDO reboot
             exit 0
         fi
-    else
-        probe_driver
+
+        info "Skipping reboot. Re-run this script after rebooting to verify the driver."
+        print_next_steps
+        exit 0
     fi
 
-    VARIANT=$(choose_variant)
-    install_binary "$VARIANT"
+    info "Driver and overlay are already installed and up to date."
+    probe_driver || true
+    print_next_steps
 }
 
 main "$@"
