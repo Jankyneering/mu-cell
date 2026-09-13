@@ -12,8 +12,8 @@ If you would rather build the driver by hand instead of running an install scrip
   - [2. Run the install script](#2-run-the-install-script)
   - [3. Verify the driver](#3-verify-the-driver)
 - [Part 2: Install and configure your radio software](#part-2-install-and-configure-your-radio-software)
-  - [Tetra-Bluestation](#tetra-bluestation)
   - [Flowstation](#flowstation)
+  - [Tetra-Bluestation](#tetra-bluestation)
   - [MMDVM-IQ](#mmdvm-iq)
   - [Other SoapySDR software](#other-soapysdr-software)
 - [Updating](#updating)
@@ -72,35 +72,49 @@ Once the probe succeeds, the board is ready and any SoapySDR application can use
 
 Each of these is a separate project with its own releases and its own documentation. Pick the one you want, install it from upstream, then use the notes here for the µCell-specific parts.
 
-### Tetra-Bluestation
+### Flowstation
 
-Stable TETRA base station software with a smaller feature set.
+TETRA base station software with a wide feature set, at the cost of some stability. It publishes pre-built binaries that already work with µCell, which makes it the fastest route to a running cell.
 
-µCell support currently lives on the testing branch and is expected to land in main. Get it from the [project repository](https://github.com/MidnightBlueLabs/tetra-bluestation), either as a release binary or built from source. Pi 5 and earlier Pi models use different builds, so pick the matching asset.
+On the Pi, fetch the binary and make it executable:
 
-Generate a `config.toml` for your cell using the configuration tool:
+```bash
+wget https://github.com/razvanzeces/flowstation/releases/download/v0.4.0/bluestation-bs
+chmod +x bluestation-bs
+```
+
+Check the [releases page](https://github.com/razvanzeces/flowstation/releases) for a newer version than the one above.
+
+Generate a `config.toml` for your cell with the configuration tool:
 
 https://bluestation.russel053.com/
 
-Copy the generated file to your Pi, then start the base station:
+Either copy/paste the contents of the generated file via SSH (while editing config.toml for instance), or transfer the file via scp:
+
+```bash
+scp config.toml <user>@<pi-address>:~/
+```
+
+Then start the base station:
 
 ```bash
 ./bluestation-bs ./config.toml
 ```
 
-### Flowstation
 
-TETRA base station software with more features than Bluestation, at the cost of some stability. Get it from the [project repository](https://github.com/razvanzeces/flowstation).
+### Tetra-Bluestation
 
-Flowstation uses the same binary name and the same configuration format, so the tool above works for it too and the command to start it is identical:
+Stable TETRA base station software with a smaller feature set.
+
+µCell support currently lives on the testing branch and is expected to land in main. Get it from the [project repository](https://github.com/MidnightBlueLabs/tetra-bluestation), and build from source. Pi 5 and earlier Pi models use different builds, so pick the matching asset.
+
+It uses the same binary name and the same configuration format as Flowstation, so the configuration tool above works for it too and the command to start it is identical:
 
 ```bash
 ./bluestation-bs ./config.toml
 ```
 
 Keep them in separate directories if you want both on the same Pi.
-
-<!-- TODO: confirm whether Flowstation's config has any fields the Bluestation generator does not cover -->
 
 ### MMDVM-IQ
 
