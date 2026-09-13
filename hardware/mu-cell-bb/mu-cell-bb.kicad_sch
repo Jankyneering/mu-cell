@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "µCell - BB")
-		(date "2026-05-24")
-		(rev "v1.2")
+		(date "2026-07-12")
+		(rev "v1.3")
 		(company "jankyneering.cc")
 		(comment 1 "ON4PFD, ON6RF")
 	)
@@ -6569,10 +6569,6 @@
 		(uuid "cf3cb7c6-97d1-4889-b25f-80a0cd78ed66")
 	)
 	(no_connect
-		(at 242.57 106.68)
-		(uuid "cfaf0a57-565e-47a6-9011-b255cbfdcfbd")
-	)
-	(no_connect
 		(at 148.59 101.6)
 		(uuid "eb55a85a-111c-40ac-b5ef-aef2dcc8f872")
 	)
@@ -8066,6 +8062,16 @@
 	)
 	(wire
 		(pts
+			(xy 237.49 104.14) (xy 237.49 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9787adc0-a869-4675-a493-93a6b602b9ea")
+	)
+	(wire
+		(pts
 			(xy 240.03 116.84) (xy 240.03 137.16)
 		)
 		(stroke
@@ -8213,6 +8219,16 @@
 			(type default)
 		)
 		(uuid "a422106d-46b3-489c-93ef-f66ad85064ad")
+	)
+	(wire
+		(pts
+			(xy 237.49 106.68) (xy 242.57 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a46229ce-957e-4433-b91a-6a8d47060387")
 	)
 	(wire
 		(pts
@@ -9916,7 +9932,7 @@
 			(justify left bottom)
 		)
 		(uuid "22c7caa3-abee-4d4c-acba-4c27b2017a71")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 135.3185 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9951,7 +9967,7 @@
 			(justify left bottom)
 		)
 		(uuid "29ce94da-ce64-4a40-9c0d-2d812601bc35")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 158.1785 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9986,7 +10002,7 @@
 			(justify left bottom)
 		)
 		(uuid "51e1b842-5afe-4d5a-9b72-5da5c77ef4ad")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 196.2785 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10021,7 +10037,7 @@
 			(justify left bottom)
 		)
 		(uuid "5cd3810e-b399-41cb-bf88-38254109a1f0")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 181.0385 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10056,7 +10072,7 @@
 			(justify left bottom)
 		)
 		(uuid "929cdbde-27b2-4cb8-a674-86296d8dce4f")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 146.7485 17.78 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10091,7 +10107,7 @@
 			(justify left bottom)
 		)
 		(uuid "a57c2647-f3bc-40ce-897d-b931d0321e4c")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 116.2685 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10126,7 +10142,7 @@
 			(justify left bottom)
 		)
 		(uuid "df61cb1f-c2af-46f0-9072-98306b4e1c41")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 106.1085 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10161,7 +10177,7 @@
 			(justify left bottom)
 		)
 		(uuid "ff64c8df-b65d-436a-95c6-022b09fd0f76")
-		(property "Net Class" "RF"
+		(property "Netclass" "RF"
 			(at 87.0585 29.21 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10259,7 +10275,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "0402WGF1004TCE"
 			(at 195.58 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -10374,7 +10390,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 240.03 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -10803,7 +10819,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 157.48 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -10917,7 +10933,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0603C103M4REC7411"
+		(property "MPN" "CC0402KRX7R9BB103"
 			(at 148.59 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -11031,7 +11047,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0603C103M4REC7411"
+		(property "MPN" "CC0402KRX7R9BB103"
 			(at 130.81 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -11143,7 +11159,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "FRC0402F3901TS"
 			(at 71.12 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -11493,7 +11509,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0603C103M4REC7411"
+		(property "MPN" "CC0402KRX7R9BB103"
 			(at 166.37 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -11607,7 +11623,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0603C103M4REC7411"
+		(property "MPN" "CC0402KRX7R9BB103"
 			(at 20.32 139.7 0)
 			(hide yes)
 			(show_name no)
@@ -11721,6 +11737,17 @@
 				)
 			)
 		)
+		(property "MPN" "BWU.FL-IPEX1"
+			(at 200.66 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "a05d1ca1-ffdd-48ef-a93e-302db0d598a7")
 		)
@@ -11814,7 +11841,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 101.6 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -12159,7 +12186,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "FRC0402F3901TS"
 			(at 58.42 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -12660,7 +12687,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402CS-39NXGRW"
 			(at 176.53 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -12864,6 +12891,17 @@
 				)
 			)
 		)
+		(property "MPN" "LBC817-40WT1G"
+			(at 208.28 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "d52a2aea-db3c-4b98-be45-eb9bc21b125b")
 		)
@@ -12960,7 +12998,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CL05A105KO5NNNC"
 			(at 20.32 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -13075,7 +13113,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 106.68 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -13258,6 +13296,17 @@
 			)
 		)
 		(property "LCSC Part" "C7496803"
+			(at 199.39 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "F.0402.00003/P2-0402R1TS2-045T-001"
 			(at 199.39 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -13594,6 +13643,17 @@
 				)
 			)
 		)
+		(property "MPN" "LBC817-40WT1G"
+			(at 208.28 147.32 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "04ccf8b1-486c-4cfb-b696-ee3a0cfcb892")
 		)
@@ -13688,7 +13748,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 161.29 43.18 0)
 			(hide yes)
 			(show_name no)
@@ -13803,7 +13863,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 121.92 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -13918,7 +13978,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CL05A475MP5NRNC"
 			(at 82.55 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -14031,7 +14091,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "RC0402FR-071KL"
 			(at 191.77 144.78 0)
 			(hide yes)
 			(show_name no)
@@ -14146,7 +14206,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 29.21 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -14258,7 +14318,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "0402WGF1004TCE"
 			(at 86.36 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -14370,6 +14430,17 @@
 				)
 			)
 		)
+		(property "MPN" "TG2016SMN 38.4000M-MCGNNM3"
+			(at 40.64 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "0530bdbf-352c-4417-882e-d2c4131603b8")
 		)
@@ -14469,7 +14540,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "GCM1555C1H3R3GA16D"
 			(at 115.57 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -14659,7 +14730,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 168.91 68.58 0)
 			(hide yes)
 			(show_name no)
@@ -14849,7 +14920,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "GCM1555C1H101FA16D"
 			(at 140.97 20.32 0)
 			(hide yes)
 			(show_name no)
@@ -14962,7 +15033,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "GCM1555C1H101FA16D"
 			(at 127 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -15077,7 +15148,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 257.81 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -15260,6 +15331,17 @@
 			)
 		)
 		(property "LCSC Part" "C74338"
+			(at 199.39 144.78 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "16-213/GHC-YR1S1/3T"
 			(at 199.39 144.78 0)
 			(hide yes)
 			(show_name no)
@@ -15594,7 +15676,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "RC0402FR-071KL"
 			(at 205.74 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -15863,7 +15945,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 168.91 83.82 0)
 			(hide yes)
 			(show_name no)
@@ -16046,6 +16128,17 @@
 		)
 		(property "LCSC Part" "C2500"
 			(at 190.5 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "BAV99,215"
+			(at 190.5 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16407,7 +16500,7 @@
 				)
 			)
 		)
-		(property "Value" "+3V3"
+		(property "Value" "+3V3_PI"
 			(at 240.03 59.3669 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -16774,6 +16867,17 @@
 				)
 			)
 		)
+		(property "MPN" "BWU.FL-IPEX1"
+			(at 30.48 33.02 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f6281638-40c1-4f77-b4a3-55832ed3cdd4")
 		)
@@ -16867,7 +16971,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 240.03 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -16980,7 +17084,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "GCM1555C1H101FA16D"
 			(at 43.18 33.02 0)
 			(hide yes)
 			(show_name no)
@@ -17249,7 +17353,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 151.13 105.41 0)
 			(hide yes)
 			(show_name no)
@@ -17441,7 +17545,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0603C103M4REC7411"
+		(property "MPN" "CC0402KRX7R9BB103"
 			(at 54.61 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -17794,7 +17898,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 257.81 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -17896,7 +18000,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402CS-22NXGRW"
 			(at 100.33 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -18100,7 +18204,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "GCM1555C1H6R8FA16D"
 			(at 95.25 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -18213,7 +18317,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 168.91 78.74 0)
 			(hide yes)
 			(show_name no)
@@ -18328,7 +18432,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402CG8R2G500NT"
 			(at 105.41 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -18441,7 +18545,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "GCM1555C1H101FA16D"
 			(at 184.15 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -18711,6 +18815,17 @@
 				)
 			)
 		)
+		(property "MPN" "BWU.FL-IPEX1"
+			(at 81.28 31.75 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "90ad4048-1815-4ea7-8266-e2363bacfd40")
 		)
@@ -18882,7 +18997,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 111.76 86.36 0)
 			(hide yes)
 			(show_name no)
@@ -18994,7 +19109,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "FRC0402F3901TS"
 			(at 64.77 130.81 0)
 			(hide yes)
 			(show_name no)
@@ -19342,7 +19457,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 257.81 73.66 0)
 			(hide yes)
 			(show_name no)
@@ -19534,6 +19649,17 @@
 				)
 			)
 		)
+		(property "MPN" "BL-HJC37A-AV-TRB"
+			(at 199.39 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "95726046-08d0-4ce5-bd8e-a3f3e019e591")
 		)
@@ -19625,7 +19751,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "RC0402FR-071KL"
 			(at 191.77 127 0)
 			(hide yes)
 			(show_name no)
@@ -19898,7 +20024,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CL05A105KO5NNNC"
 			(at 63.5 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -20011,7 +20137,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "RC0402FR-071KL"
 			(at 191.77 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -20809,7 +20935,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW06033K9FKECC"
+		(property "MPN" "RC0402FR-071KL"
 			(at 205.74 152.4 0)
 			(hide yes)
 			(show_name no)
@@ -20924,7 +21050,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 240.03 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -21104,7 +21230,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402CS-39NXGRW"
 			(at 171.45 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -21386,7 +21512,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 240.03 73.66 0)
 			(hide yes)
 			(show_name no)
@@ -21498,7 +21624,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "0402WGF1004TCE"
 			(at 38.1 36.83 0)
 			(hide yes)
 			(show_name no)
@@ -21603,6 +21729,17 @@
 			)
 		)
 		(property "LCSC Part" "C22418535"
+			(at 161.29 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "2118707-4"
 			(at 161.29 167.64 0)
 			(hide yes)
 			(show_name no)
@@ -21935,7 +22072,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 138.43 105.41 0)
 			(hide yes)
 			(show_name no)
@@ -22203,7 +22340,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 146.05 105.41 0)
 			(hide yes)
 			(show_name no)
@@ -22318,6 +22455,17 @@
 				)
 			)
 		)
+		(property "MPN" "LDK130M33R"
+			(at 44.45 177.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "8386ff17-0062-4e4c-bb55-3d20e7e0fb43")
 		)
@@ -22337,6 +22485,84 @@
 			(project "mu-cell-bb"
 				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
 					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 237.49 104.14 0)
+		(mirror y)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dcb4e97b-7db4-4115-824d-11291f7978b2")
+		(property "Reference" "#PWR0152"
+			(at 237.49 107.95 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+3V3_PI"
+			(at 237.49 100.0069 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 237.49 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 237.49 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 237.49 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5de20105-71c2-44ed-80b4-4842e9b1bcdd")
+		)
+		(instances
+			(project "mu-cell-bb"
+				(path "/564c8f3e-4a0a-4bb3-921f-1318a09780f9"
+					(reference "#PWR0152")
 					(unit 1)
 				)
 			)
@@ -22576,7 +22802,7 @@
 				)
 			)
 		)
-		(property "MPN" "C0603C103M4REC7411"
+		(property "MPN" "CC0402KRX7R9BB103"
 			(at 24.13 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -22847,7 +23073,7 @@
 				)
 			)
 		)
-		(property "MPN" ""
+		(property "MPN" "0402CS-39NXGRW"
 			(at 110.49 31.75 0)
 			(hide yes)
 			(show_name no)
@@ -22963,6 +23189,17 @@
 			)
 		)
 		(property "LCSC Part" "C615210"
+			(at 40.64 138.43 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "24LC256-E/SN"
 			(at 40.64 138.43 0)
 			(hide yes)
 			(show_name no)
@@ -23133,6 +23370,17 @@
 			)
 		)
 		(property "LCSC Part" "C89372"
+			(at 128.27 66.04 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "SX1255IWLTRT"
 			(at 128.27 66.04 0)
 			(hide yes)
 			(show_name no)
@@ -23732,7 +23980,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 257.81 71.12 0)
 			(hide yes)
 			(show_name no)
@@ -23925,7 +24173,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 72.39 182.88 0)
 			(hide yes)
 			(show_name no)
@@ -24120,7 +24368,7 @@
 				)
 			)
 		)
-		(property "MPN" "06035G104ZAT2A"
+		(property "MPN" "CC0402KRX7R7BB104"
 			(at 139.7 129.54 0)
 			(hide yes)
 			(show_name no)
@@ -24421,7 +24669,7 @@
 				)
 			)
 		)
-		(property "MPN" "CRCW0603100RFKECC"
+		(property "MPN" "RC0402FR-07100RL"
 			(at 168.91 81.28 0)
 			(hide yes)
 			(show_name no)
