@@ -6,6 +6,8 @@
 
 <p align="center">An open-source SDR base station platform for digital and analog voice modes.</p>
 
+Got a board? Start with the [Quick Start Guide](docs/quickStartGuide.md).
+
 ---
 
 ## Contents
