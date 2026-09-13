@@ -95,7 +95,7 @@ Match the part you are replacing. The onboard reference is a Seiko Epson TG2016S
 
 A 4-pin header for a standard 0.96 inch SSD1306 OLED, wired to the Pi's I2C bus.
 
-![SSD1306 OLED header schematic](./docs/oled-header.png)
+![SSD1306 OLED header schematic](./oled-header.png)
 
 | Pin | Signal |
 |---|---|
@@ -110,7 +110,7 @@ There is no µCell software support for the display yet. It sits on the standard
 
 A 2x6 12-position IDC connector on 2.54 mm pitch, for accessories and future modules, including the µCell Display. It breaks out power, the TX and RX lines, I2C, and two spare GPIOs. Every signal line goes through a 100R series resistor.
 
-![J5 expansion connector schematic](./docs/io-header.png)
+![J5 expansion connector schematic](./io-header.png)
 
 | Pin | Signal |
 |---|---|
