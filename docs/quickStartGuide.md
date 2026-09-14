@@ -124,16 +124,22 @@ Follow the build and configuration instructions in the [upstream repository](htt
 
 ### Other SoapySDR software
 
-The µCell BB registers as a standard SoapySDR device, so anything that speaks SoapySDR can use it. Use this device string:
+The µCell BB registers as a standard SoapySDR device, so anything that speaks SoapySDR can use it. With the board fitted and the driver from Part 1 installed, most sofware will list it in the available devices. 
+
+| Software | Status |
+|---|---|
+| GQRX | Supported. The board appears in the device dropdown, select it and go. |
+| CubicSDR | Tested working. Picked up at startup. |
+| GNU Radio | Should work through the Soapy Source and Sink blocks. Lightly tested so far. |
+| SDR++ | Needs a dedicated source module, which has not been written yet. |
+
+If you ever do need to name the device by hand, for a GNU Radio block or a command line tool, the string is:
 
 ```
 driver=mucell
 ```
 
-In GQRX, choose "Other" as the device and enter the string above. GNU Radio users can pass the same string to a Soapy Source or Sink block. SDR++ picks the device up through its SoapySDR source module. Nothing µCell-specific needs to be installed beyond the driver from Part 1.
-
 <!-- TODO: this section is the extension point. When a new mode or stack is brought up, add a sibling heading here with a link upstream. -->
-
 ---
 
 ## Updating
@@ -164,4 +170,4 @@ The driver warns that no public keys are compiled in
 : The driver was built without any `.pem` files in `public_keys/`. It still works. Rebuild with the keys present if you want signature checking.
 
 The radio starts but the frequency is off
-: If you cut JP1 to use an external reference, check that the external source is present and at the right level. See [hardware.md](hardware.md#external-clock).
+: If you cut JP1 to use an external reference, check that the external source is present and at the right level. See [hardware.md](hardware.md#external-clock). If you want to use the internal source and need better accuary, compensate it in software (most implement a ppm correction line in the configuration files). 

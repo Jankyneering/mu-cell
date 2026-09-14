@@ -78,7 +78,19 @@ The stack has three layers.
 
 <!-- TODO: confirm the Bluestation branch wording, and whether MMDVM-IQ is "in progress" or already usable -->
 
-Each of these is its own project with its own installation instructions. General-purpose SDR software such as GQRX, SDR++, or GNU Radio also works with the board. The [quick start guide](docs/quickStartGuide.md) links to each one.
+Each of these is its own project with its own installation instructions. 
+General-purpose SDR software reaches the board the same way, through the `driver=mucell` device string:
+
+
+| Software | Status |
+|---|---|
+| [GQRX](https://www.gqrx.dk/) | Supported |
+| [CubicSDR](https://cubicsdr.com/) | Supported |
+| [GNU Radio](https://www.gnuradio.org/) | Should work through the Soapy blocks, more testing needed |
+| [SDR++](https://www.sdrpp.org/) | Needs a dedicated source module, not yet written |
+
+The [quick start guide](docs/quickStartGuide.md) covers how to point each one at the board.
+
 
 ---
 
