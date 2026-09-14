@@ -4,7 +4,7 @@ Upload RF test results (TX Power, RX Sensitivity) from a CSV to InvenTree
 as test results against serialized µCell Baseband stock items.
 
 CSV format (UTF-8, header row required):
-    "Serial number","TX Power (dBm)","RX Sensitivity (dBm)"
+    "Batch Number","Serial number","TX Power (dBm)","RX Sensitivity (dBm)"
 
 Requirements:
     pip install inventree python-dotenv
@@ -29,6 +29,7 @@ from inventree.api import InvenTreeAPI
 
 PART_IPN = "mu-cell-bb"
 SERIAL_COLUMN = "Serial number"
+BATCH_COLUMN = "Batch Number"
 
 # CSV column -> (InvenTree test template name, pass/fail rule)
 TESTS = {
@@ -80,12 +81,12 @@ def get_test_template_pks(api: InvenTreeAPI, part_pk: int) -> dict:
     return by_name
 
 
-def get_stock_item_pk(api: InvenTreeAPI, part_pk: int, serial: str):
-    items = api.get("stock/", params={"part": part_pk, "serial": serial})
+def get_stock_item_pk(api: InvenTreeAPI, part_pk: int, batch: str, serial: str):
+    items = api.get("stock/", params={"part": part_pk, "batch": batch, "serial": serial})
     if not items:
         return None
     if len(items) > 1:
-        print(f"  ! multiple stock items match serial {serial}, skipping")
+        print(f"  ! multiple stock items match batch {batch} / serial {serial}, skipping")
         return None
     return items[0]["pk"]
 
@@ -102,10 +103,11 @@ def main(csv_path: str):
     with open(csv_path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
+            batch = row[BATCH_COLUMN].strip()
             serial = row[SERIAL_COLUMN].strip()
-            stock_pk = get_stock_item_pk(api, part_pk, serial)
+            stock_pk = get_stock_item_pk(api, part_pk, batch, serial)
             if stock_pk is None:
-                print(f"[{serial}] stock item not found, skipping")
+                print(f"[{batch}/{serial}] stock item not found, skipping")
                 missing += 1
                 continue
 
@@ -114,7 +116,7 @@ def main(csv_path: str):
                 try:
                     value = float(raw)
                 except ValueError:
-                    print(f"[{serial}] bad value '{raw}' for {column}, skipping test")
+                    print(f"[{batch}/{serial}] bad value '{raw}' for {column}, skipping test")
                     continue
 
                 result = cfg["passes"](value)
@@ -127,7 +129,7 @@ def main(csv_path: str):
                         "result": result,
                     },
                 )
-                print(f"[{serial}] {column} = {raw} -> {'PASS' if result else 'FAIL'}")
+                print(f"[{batch}/{serial}] {column} = {raw} -> {'PASS' if result else 'FAIL'}")
                 ok += 1 if result else 0
                 failed += 0 if result else 1
 
