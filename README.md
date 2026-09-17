@@ -74,6 +74,7 @@ The stack has three layers.
 |---|---|---|
 | [Flowstation](https://github.com/razvanzeces/flowstation) | TETRA, wider feature set, less stable | Supported |
 | [Tetra-Bluestation](https://github.com/MidnightBlueLabs/tetra-bluestation) | TETRA, stable, fewer features | Supported on the testing branch, landing in main |
+| [Nexus-BS](https://github.com/invictus737/nexus-bs/) | TETRA, different development direction than Flowstation | Untested, but claims support |
 | [MMDVM-IQ](https://github.com/g4klx/MMDVM-IQ) | FM, DMR, D-Star, YSF, P25, POCSAG | Supported |
 
 <!-- TODO: confirm the Bluestation branch wording, and whether MMDVM-IQ is "in progress" or already usable -->
